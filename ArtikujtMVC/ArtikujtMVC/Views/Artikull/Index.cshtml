@@ -1,0 +1,106 @@
+﻿@model ArtikujtMVC.Models.Artikull
+@{
+    ViewBag.Title = "Home";
+}
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["success"]
+    </div>
+}
+
+<form name="artikullform" method="post" onsubmit="ruajButton.disabled = true; return true;">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.IsNew)
+
+
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputEmri4">Emri</label>
+            <input required type="text" class="form-control" id="inputEmri4" placeholder="Emri" name="emri" value="@(Model.IsNew ? "" : Model.Emri)">
+            @Html.ValidationMessageFor(model => model.Emri, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputNjesi4">Njesia</label>
+            <input required type="text" class="form-control" id="inputNjesi4" placeholder="Njesia" name="njesia" value="@(Model.IsNew ? "" : Model.Njesia)">
+            @Html.ValidationMessageFor(model => model.Njesia, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputDataSkadences4">Data Skadences</label>
+            <input type="date" class="form-control" id="inputDataSkadences4" required name="dataSkadences" value="@(Model.IsNew ? "" : Model.DataSkadences.ToString("yyyy-MM-dd"))">
+            @Html.ValidationMessageFor(model => model.DataSkadences, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputCmimi4">Cmimi</label>
+            <input required type="number" class="form-control" id="inputCmimi4" placeholder="Cmimi" step='0.01' name="cmimi" value="@(Model.IsNew ? 0 : Model.Cmimi)" 
+                   min="0" onkeydown="javascript: return event.keyCode !== 69" >
+            @Html.ValidationMessageFor(model => model.Cmimi, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputLloj4">Lloj</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="radio" required name="lloj" value="@(ArtikujtMVC.Models.Lloj.Importuar)" @(Model.Lloj == ArtikujtMVC.Models.Lloj.Importuar ? "checked" : "")>
+                    </div>
+                    
+                    <span class="input-group-text">Importuar</span>
+                </div>
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <input type="radio" name="lloj" value="@(ArtikujtMVC.Models.Lloj.Vendi)" @(Model.Lloj == ArtikujtMVC.Models.Lloj.Vendi ? "checked" : "")>
+                    </div>
+                    <span class="input-group-text">Vendi</span>
+                </div>
+            </div>
+            @Html.ValidationMessageFor(model => model.Lloj, "", new { @class = "text-danger" })
+        </div>
+        <div class="custom-control custom-checkbox mb-3">
+            <input type="checkbox" class="custom-control-input" id="inputkaTvsh4" name="kaTvsh" @(Model.KaTvsh ? "checked" : "") value="true">
+            <label class="custom-control-label" for="inputkaTvsh4">Ka TVSH?</label>
+            @Html.ValidationMessageFor(model => model.KaTvsh, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputTipi4">Tipi</label>
+            <select class=" form-control" required name="tipi">
+                <option value="">Selekto Tipin</option>
+                <option @(Model.Tipi == ArtikujtMVC.Models.Tipi.Ushqimore ? "selected" : "") value="@ArtikujtMVC.Models.Tipi.Ushqimore">Ushqimore</option>
+                <option @(Model.Tipi == ArtikujtMVC.Models.Tipi.Bulmet ? "selected" : "") value="@ArtikujtMVC.Models.Tipi.Bulmet">Bulmet</option>
+                <option @(Model.Tipi == ArtikujtMVC.Models.Tipi.Pije ? "selected" : "") value="@ArtikujtMVC.Models.Tipi.Ushqimore">Pije</option>
+                <option @(Model.Tipi == ArtikujtMVC.Models.Tipi.Embelsire ? "selected" : "") value="@ArtikujtMVC.Models.Tipi.Embelsire">Embelsire</option>
+            </select>
+            @Html.ValidationMessageFor(model => model.Tipi, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputBarkod4">Barkod</label>
+            <input required type="text" class="form-control" id="inputBarkod4" placeholder="Barkod" name="barkod" value="@(Model.IsNew ? "" : Model.Barkod)">
+            @Html.ValidationMessageFor(model => model.Barkod, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <input type="submit" id="ruaj-artukull-button" class="hidden"  name="ruajButton" />
+
+
+</form>
+
+<form name="artikullformdelete" method="post" action="@Url.Action("Fshi", "Artikull")">
+    <input type="hidden" name="id" value="@(Model.Id)" />
+    <input type="submit" id="fshi-artukull-button" class="hidden" />
+</form>
+
+
+<label for="ruaj-artukull-button" class="btn btn-primary" tabindex="0">Ruaj</label>
+@if (!Model.IsNew)
+{
+    <label for="fshi-artukull-button" class="btn btn-danger" tabindex="0">Fshi</label>
+}

@@ -1,0 +1,48 @@
+﻿
+@model ArtikujtMVC.Models.PaginatedList<ArtikujtMVC.Models.Artikull>
+
+@{
+    ViewBag.Title = "Kerko Artikull";
+}
+
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["success"]
+    </div>
+}
+
+<ul class="list-group ">
+    @foreach (var artikull in Model.Models)
+    {
+        <a href="@Url.Action("Index", "Artikull", new {id=@artikull.Id})" class="card">
+            <li class="list-group-item list-group-item-action">
+                <span class="badge badge-secondary badge-pill">@artikull.Id</span>
+                <span class="mx-5 h5">@artikull.Emri</span>
+                <span class="badge badge-primary badge-pill float-right">@artikull.Cmimi LEK</span>
+            </li>
+
+        </a>
+
+    }
+
+</ul>
+<br />
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        @foreach (var page in Model.Pages)
+        {
+
+            <li class="page-item @(page.IsActive ? "active" : "")">
+                <a class="page-link" href="@Url.Action("Kerko", "Artikull", new { index = page.Index})">
+                    @page.Index
+                    @if (page.IsActive)
+                    {
+                        <span class="sr-only">(current)</span>
+                    }
+                </a>
+            </li>
+        }
+    </ul>
+</nav>

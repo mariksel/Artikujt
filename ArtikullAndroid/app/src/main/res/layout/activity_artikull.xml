@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ArtikullActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="1"
+                    >
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:textSize="23sp"
+                        android:gravity="center"
+                        android:text="Artikull"/>
+
+                    <Button
+                        android:id="@+id/kerkoButton"
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@color/colorSecondary"
+                        android:text="Kerko"
+                        android:textSize="16sp"
+                        android:textColor="#fff"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <include
+            android:id="@+id/artikullContent"
+            layout="@layout/content_artikull"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/controlsLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <LinearLayout
+            android:id="@+id/controlsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/artikullContent"
+            android:background="@color/colorPrimaryDark"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <Button
+                android:id="@+id/ruajButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Ruaj"
+                android:layout_weight="1"
+                tools:layout_editor_absoluteX="31dp"
+                tools:layout_editor_absoluteY="8dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_margin="7dp"
+                android:textColor="#fff"
+                android:background="@color/success"/>
+            <Button
+                android:id="@+id/fshiButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Fshi"
+                android:layout_weight="1"
+                tools:layout_editor_absoluteX="31dp"
+                tools:layout_editor_absoluteY="8dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:layout_margin="7dp"
+                android:background="@color/danger"/>/>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:visibility="gone"
+        app:srcCompat="@android:drawable/ic_dialog_email" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

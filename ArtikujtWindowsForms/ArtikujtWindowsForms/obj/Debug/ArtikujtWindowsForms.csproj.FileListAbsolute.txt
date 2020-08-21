@@ -1,0 +1,16 @@
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\obj\Debug\ArtikujtWindowsForms.csprojAssemblyReference.cache
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\obj\Debug\ArtikujtWindowsForms.ArtikullForm.resources
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\obj\Debug\ArtikujtWindowsForms.KerkoForm.resources
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\obj\Debug\ArtikujtWindowsForms.Properties.Resources.resources
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\obj\Debug\ArtikujtWindowsForms.csproj.GenerateResource.cache
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\obj\Debug\ArtikujtWindowsForms.csproj.CoreCompileInputs.cache
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\bin\Debug\ArtikujtWindowsForms.exe.config
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\bin\Debug\ArtikujtWindowsForms.exe
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\bin\Debug\ArtikujtWindowsForms.pdb
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\obj\Debug\ArtikujtWindowsForms.exe
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\obj\Debug\ArtikujtWindowsForms.pdb
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\bin\Debug\EntityFramework.dll
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\bin\Debug\EntityFramework.SqlServer.dll
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\bin\Debug\EntityFramework.xml
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\bin\Debug\EntityFramework.SqlServer.xml
+D:\reposD\ArtikullProjects\ArtikujtWindowsForms\ArtikujtWindowsForms\obj\Debug\ArtikujtWindowsForms.csproj.CopyComplete
