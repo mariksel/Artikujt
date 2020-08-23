@@ -172,7 +172,7 @@ Begin VB.Form ArtikullForm
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Format          =   108199937
+      Format          =   108789761
       CurrentDate     =   44058
    End
    Begin VB.CommandButton FshiButton 
@@ -479,7 +479,9 @@ Private Sub CmimiTextBox_Change()
 
     If IsNumeric(CmimiTextBox.text) Then
         If CDbl(CmimiTextBox.text) >= 0 Then
-            mArtikull.Cmimi = CDbl(CmimiTextBox.text)
+            Dim numTxt As String
+            numTxt = Replace(CmimiTextBox.text, ",", ".")
+            mArtikull.Cmimi = CDbl(numTxt)
         Else
             CmimiTextBox.text = CStr(mArtikull.Cmimi)
         End If
@@ -545,6 +547,8 @@ Private Sub RuajButton_Click()
         Else
             repo.UpdateArtikull Me.mArtikull
         End If
+        CreateNewArtikull
+        Reset
         repo.Dispose
         MsgBox "Artikulli u ruajt me sukses", vbOKOnly, "Sukses"
     End If

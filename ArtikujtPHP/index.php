@@ -16,6 +16,7 @@ if(cleanPath() == '/kerko'){
     kerko($pageIndex);
 }
 else if(cleanPath() == '/') {
+    Service::$dilButton = "Artikull i ri";
     if(isPost()){
         if (isset($_GET['id'])) {
 
@@ -97,7 +98,7 @@ function indexPOST(?int $id){
         Service::$error = $e->getMessage();
       }
 
-      indexGET($id);
+      indexGET(NULL);
     
 }
 

@@ -4,7 +4,7 @@ require_once 'models/pagination.php';
 
 class Repository{
     public const ARTIKUJT = 'artikujt';
-    public const DATE_FORMAT = 'Y-m-d H:i:s';
+    public const DATE_FORMAT = 'Y-m-d';
 
     public static bool $isInitialized = false;
 

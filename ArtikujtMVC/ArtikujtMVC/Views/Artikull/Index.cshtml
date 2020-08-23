@@ -37,7 +37,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="inputCmimi4">Cmimi</label>
-            <input required type="number" class="form-control" id="inputCmimi4" placeholder="Cmimi" step='0.01' name="cmimi" value="@(Model.IsNew ? 0 : Model.Cmimi)" 
+            <input required type="number" class="form-control" id="inputCmimi4" placeholder="Cmimi" step='0.01' name="cmimi" value="@(Model.IsNew ? "" : Model.Cmimi.ToString("F99").TrimEnd('0').TrimEnd('.'))" 
                    min="0" onkeydown="javascript: return event.keyCode !== 69" >
             @Html.ValidationMessageFor(model => model.Cmimi, "", new { @class = "text-danger" })
         </div>

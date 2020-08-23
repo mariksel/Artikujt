@@ -69,6 +69,8 @@ function updateArtikull(){
                 showError(result.message);
             }
             ruajButtonElm.disabled = false;
+            createNewArtikull();
+            reset();
         },
         error: function (xhr, ajaxOptions, thrownError) {
           alert(xhr.status);

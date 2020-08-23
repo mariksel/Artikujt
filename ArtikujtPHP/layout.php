@@ -18,7 +18,7 @@
                 <ul>
 
                     <li class="nav-item">
-                        <a href="/" class="nav-link">Dil</a>
+                        <a href="/" class="nav-link"><?=Service::$dilButton ?></a>
                     </li>
                     <li class="nav-item">
                         <a href="/kerko" class="nav-link">Kerko</a>

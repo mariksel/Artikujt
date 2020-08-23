@@ -19,7 +19,7 @@
             <li class="list-group-item list-group-item-action">
                 <span class="badge badge-secondary badge-pill">@artikull.Id</span>
                 <span class="mx-5 h5">@artikull.Emri</span>
-                <span class="badge badge-primary badge-pill float-right">@artikull.Cmimi LEK</span>
+                <span class="badge badge-primary badge-pill float-right">@artikull.Cmimi.ToString("F99").TrimEnd('0').TrimEnd('.') LEK</span>
             </li>
 
         </a>

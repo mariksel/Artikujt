@@ -63,6 +63,7 @@ public class ArtikullActivity extends AppCompatActivity {
     Spinner tipiSpiner;
     EditText barkodEditText;
 
+    Button artikullIRiButton;
     Button kerkoButton;
     Button ruajButton;
     Button fshiButton;
@@ -89,6 +90,7 @@ public class ArtikullActivity extends AppCompatActivity {
         tipiSpiner = (Spinner) findViewById(R.id.tipiSpinner);
         barkodEditText = findViewById(R.id.barkodEditText);
 
+        artikullIRiButton = findViewById(R.id.artikullIRiButton);
         kerkoButton = findViewById(R.id.kerkoButton);
         ruajButton = findViewById(R.id.ruajButton);
         fshiButton = findViewById(R.id.fshiButton);
@@ -233,6 +235,13 @@ public class ArtikullActivity extends AppCompatActivity {
             }
         });
 
+        artikullIRiButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CreateNewArtikull();
+                Reset();
+            }
+        });
 
         kerkoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -258,13 +267,12 @@ public class ArtikullActivity extends AppCompatActivity {
                 boolean succeeded = false;
                 if(artikull.isNew){
                     succeeded = repo.addArtikull(artikull);
-                    if(succeeded){
-                        CreateNewArtikull();
-                        Reset();
-                    }
-
                 } else {
                     succeeded = repo.updateArtikull(artikull);
+                }
+                if(succeeded){
+                    CreateNewArtikull();
+                    Reset();
                 }
 
                 if(succeeded)

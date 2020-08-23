@@ -19,7 +19,7 @@ namespace ArtikujtMVC.Models
         public string Njesia { get; set; }
         [Required(ErrorMessage = "Data Skadences duhet plotesuar")]
         public DateTime DataSkadences { get; set; }
-        [Range(0, int.MaxValue, ErrorMessage = "Cmimi nuk mund te jete nje numer negativ")]
+        [Range(0, long.MaxValue, ErrorMessage = "Cmimi nuk mund te jete nje numer negativ ose nje numer shume i madh")]
         public double Cmimi { get; set; }
         [Required(ErrorMessage = nameof(Lloj) + " duhet plotesuar")]
         public string Lloj { get; set; }

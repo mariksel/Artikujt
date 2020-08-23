@@ -10,6 +10,7 @@ class Service{
     public static string $page = '';
     public static Artikull $artikull;
     public static Pagination $pagination;
+    public static string $dilButton = "Dil";
 
     public static function init(){
         

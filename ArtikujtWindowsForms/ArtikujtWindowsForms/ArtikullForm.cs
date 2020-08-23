@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -100,17 +101,23 @@ namespace ArtikujtWindowsForms
             using (var context = new ApplicationDBContext())
             {
 
-                context.Artikujt.AddOrUpdate(Artikull);
-                var rowsNr = context.SaveChanges();
-                if (rowsNr > 0)
+                try
                 {
+                    context.Artikujt.AddOrUpdate(Artikull);
+                    var rowsNr = context.SaveChanges();
+
                     MessageBox.Show(this, "Artikulli u ruajt me sukses", "Suksess", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    if (Artikull.IsNew)
-                    {
-                        CreateNewArtikull();
-                        Reset();
-                    }
+
+                    CreateNewArtikull();
+                    Reset();
                 }
+                catch (DbEntityValidationException ex)
+                {
+                    MessageBox.Show(this, ex.EntityValidationErrors.First().ValidationErrors.First().ErrorMessage, 
+                        "Probleme me artikullin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                
 
             }
         }
@@ -178,8 +185,14 @@ namespace ArtikujtWindowsForms
         private void cmimiTextBox_TextChanged(object sender, EventArgs e)
         {
             Artikull.Cmimi = 0;
-            if (!string.IsNullOrEmpty(cmimiTextBox.Text)){
-                Artikull.Cmimi = double.Parse(cmimiTextBox.Text);
+            string num = cmimiTextBox.Text;
+            num = num.Replace(',', '.');
+            num = num.TrimEnd('.');
+            if (!string.IsNullOrEmpty(num)){
+                if (double.TryParse(num, out double cmimi))
+                    Artikull.Cmimi = cmimi;
+                else
+                    cmimiTextBox.Text = Artikull.Cmimi.ToString();
             }
         }
 
@@ -209,13 +222,20 @@ namespace ArtikujtWindowsForms
 
         public void onlynumwithsinglepoint(object sender, KeyPressEventArgs e)
         {
-            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == '.'))
+            if (!(char.IsDigit(e.KeyChar) || e.KeyChar == (char)Keys.Back || e.KeyChar == '.' || e.KeyChar == ','))
             { e.Handled = true; }
             TextBox txtDecimal = sender as TextBox;
-            if (e.KeyChar == '.' && txtDecimal.Text.Contains("."))
+            if ((e.KeyChar == '.' || e.KeyChar == ',') && HasDecimpaPoint(txtDecimal.Text) 
+                || e.KeyChar == 'e')
             {
                 e.Handled = true;
             }
+
+        }
+
+        private bool HasDecimpaPoint(string value)
+        {
+            return value.Contains(".") || value.Contains(",");
         }
 
         private void cmimiTextBox_KeyPress(object sender, KeyPressEventArgs e)

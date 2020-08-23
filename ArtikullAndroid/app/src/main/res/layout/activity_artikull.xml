@@ -42,6 +42,17 @@
                         android:text="Artikull"/>
 
                     <Button
+                        android:id="@+id/artikullIRiButton"
+                        android:layout_width="130dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:background="@color/colorSecondary"
+                        android:text="Artikull I Ri"
+                        android:textSize="16sp"
+                        android:textColor="#fff"
+                        android:textStyle="bold"/>
+
+                    <Button
                         android:id="@+id/kerkoButton"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"

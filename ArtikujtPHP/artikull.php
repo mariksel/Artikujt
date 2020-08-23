@@ -48,11 +48,13 @@
 </div>
 <?php endif; ?>
 
-<form name="artikullform" method="post" onsubmit="ruajButton.disabled = true; return true;">
+<form name="artikullform" method="post" onsubmit="return validateForm(this)" >
 
     <input type="hidden" name="id"  <?=$idValue?>/>
     <input type="hidden" name="isNew" <?=$isNewValue?>/>
-
+     <div class="alert alert-danger" id="error" role="alert" style="display: none">
+        
+    </div>
 
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -103,8 +105,8 @@
     </div>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="inputTipi4">Tipi</label>
-            <select class=" form-control" required name="tipi">
+            <label for="selectTipi">Tipi</label>
+            <select class=" form-control" id="selectTipi" required name="tipi" onchange="this.setCustomValidity('')">
                 <option value="<?=Tipi::None?>">Selekto Tipin</option>
                 <option <?=boolToSelected($artikull->tipi == Tipi::Ushqimore)?> value="<?=Tipi::Ushqimore?>">Ushqimore</option>
                 <option <?=boolToSelected($artikull->tipi == Tipi::Bulmet)?>  value="<?=Tipi::Bulmet?>">Bulmet</option>
@@ -117,7 +119,7 @@
             <input required type="text" class="form-control" id="inputBarkod4" placeholder="Barkod" name="barkod" <?=$barkodValue?>>
         </div>
     </div>
-    <input type="submit" id="ruaj-artukull-button" class="hidden"  name="ruajButton"/>
+    <input type="submit"  class="hidden"  name="ruajButton" id="ruajButton"/>
 
 
 </form>
@@ -128,10 +130,33 @@
 </form>
 
 
-<label for="ruaj-artukull-button" class="btn btn-primary" tabindex="0">Ruaj</label>
+<label for="ruajButton" class="btn btn-primary" tabindex="0">Ruaj</label>
 
 <?php  if (!$isNew): ?>
     <label for="fshi-artukull-button" class="btn btn-danger" tabindex="0">Fshi</label>
 <?php endif; ?>
 
+<script>
+    function validateForm(form){error
+        try{
+            let selectTipi = document.getElementById('selectTipi')
 
+            let ruajButton = document.getElementById('ruajButton')
+            selectTipi.setCustomValidity("");
+            
+            ruajButton.disabled = true; 
+
+            if (selectTipi.value == "<?=Tipi::None?>") {
+                selectTipi.setCustomValidity("Tipi duhet plotesuar");
+                ruajButton.disabled = false; 
+                form.reportValidity();
+                return false; 
+            }
+        } catch(ex){
+            console.log("", ex);
+            ruajButton.disabled = false; 
+            return false;
+        }
+        return true;
+    }
+</script>
