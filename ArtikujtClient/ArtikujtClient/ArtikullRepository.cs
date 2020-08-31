@@ -44,7 +44,7 @@ namespace ArtikujtClient
             return new PaginatedList<Artikull>(artikujt, numberOfPages, index);
         }
 
-        public async Task RuajArtikull(Artikull artikull)
+        public async Task RuajArtikullAsync(Artikull artikull)
         {
             artikull.ProcessStatus = ProcessStatus.UnProcessed;
             Artikujt.AddOrUpdate(artikull);
@@ -70,11 +70,12 @@ namespace ArtikujtClient
 
         }
 
-        public async Task<Artikull[]> GetUnprocessedArtikujtAsync()
+        public async Task<Artikull[]> GetUnprocessedArtikujtAsync(bool isDeleted)
         {
 
             var artikujt = await Artikujt
-                .Where(a => a.ProcessStatus == ProcessStatus.UnProcessed)
+                .Where(a => a.ProcessStatus == ProcessStatus.UnProcessed
+                && a.IsDeleted == isDeleted)
                 .ToArrayAsync();
             return artikujt;
 

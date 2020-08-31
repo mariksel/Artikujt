@@ -103,7 +103,7 @@ namespace ArtikujtClient
             Hide();
         }
 
-        private void RuajButton_Click(object sender, EventArgs e)
+        private async void RuajButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -116,27 +116,40 @@ namespace ArtikujtClient
 
             using (var repo = new ArtikullRepository())
             {
-
+                var currentArtikull = Artikull;
                 try
                 {
-                    repo.RuajArtikull(Artikull).Wait();
+                    currentArtikull.OnSave();
 
+                    await repo.RuajArtikullAsync(currentArtikull);
                     MessageBox.Show(this, "Artikulli u ruajt me sukses", "Suksess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    if (currentArtikull.IsNew)
+                    {
+                        currentArtikull.IsNew = false;
+                        artikujtListControl1.AddArtikull(currentArtikull);
+                    }
 
                     CreateNewArtikull();
                     Reset();
+
+                    await ClientSync.Instance.SaveArtikujtAsync(currentArtikull);
+
                 }
                 catch (DbEntityValidationException ex)
                 {
                     MessageBox.Show(this, ex.EntityValidationErrors.First().ValidationErrors.First().ErrorMessage, 
                         "Probleme me artikullin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
                     return;
                 } catch(Exception ex)
                 {
                     MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                     return;
                 }
-                
+
+                currentArtikull.OnSave(false);
 
             }
         }
@@ -148,6 +161,7 @@ namespace ArtikujtClient
                 try
                 {
                     await repo.FshiArtikullAsync(Artikull);
+                    await ClientSync.Instance.DeleteArtikujtAsync(Artikull);
                 } 
                 catch (Exception ex){
                     MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -262,11 +276,6 @@ namespace ArtikujtClient
             onlynumwithsinglepoint(sender, e);
             if (e.KeyChar == '-')
                 e.Handled = true;
-        }
-
-        private void artikujtListControl1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -44,7 +44,7 @@ namespace ArtikujtService.Controllers
         /// </summary>
         /// <param name="artikullIds"></param>
         /// <returns></returns>
-        [HttpDelete("logs")]
+        [HttpPost("logs/delete")]
         public async Task<ActionResult<ApiResponse>> DleteArtikullLogs(string[] artikullIds)
         {
             var result = await _artikullService.DeleteArtikujtLogs(artikullIds);

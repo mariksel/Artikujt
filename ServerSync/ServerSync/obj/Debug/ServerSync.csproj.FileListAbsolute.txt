@@ -1,0 +1,15 @@
+D:\reposD\ArtikullProjects\ServerSync\ServerSync\obj\Debug\ServerSync.csprojAssemblyReference.cache
+D:\reposD\ArtikullProjects\ServerSync\ServerSync\obj\Debug\ServerSync.ServerSyncForm.resources
+D:\reposD\ArtikullProjects\ServerSync\ServerSync\obj\Debug\ServerSync.Properties.Resources.resources
+D:\reposD\ArtikullProjects\ServerSync\ServerSync\obj\Debug\ServerSync.csproj.GenerateResource.cache
+D:\reposD\ArtikullProjects\ServerSync\ServerSync\obj\Debug\ServerSync.csproj.CoreCompileInputs.cache
+D:\reposD\ArtikullProjects\ServerSync\ServerSync\bin\Debug\ServerSync.exe.config
+D:\reposD\ArtikullProjects\ServerSync\ServerSync\bin\Debug\ServerSync.exe
+D:\reposD\ArtikullProjects\ServerSync\ServerSync\bin\Debug\ServerSync.pdb
+D:\reposD\ArtikullProjects\ServerSync\ServerSync\bin\Debug\EntityFramework.dll
+D:\reposD\ArtikullProjects\ServerSync\ServerSync\bin\Debug\EntityFramework.SqlServer.dll
+D:\reposD\ArtikullProjects\ServerSync\ServerSync\bin\Debug\EntityFramework.xml
+D:\reposD\ArtikullProjects\ServerSync\ServerSync\bin\Debug\EntityFramework.SqlServer.xml
+D:\reposD\ArtikullProjects\ServerSync\ServerSync\obj\Debug\ServerSync.csproj.CopyComplete
+D:\reposD\ArtikullProjects\ServerSync\ServerSync\obj\Debug\ServerSync.exe
+D:\reposD\ArtikullProjects\ServerSync\ServerSync\obj\Debug\ServerSync.pdb

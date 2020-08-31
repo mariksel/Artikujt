@@ -63,12 +63,13 @@
             // 
             // panel1
             // 
+
             this.panel1.Controls.Add(this.ArtikujtListView);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(540, 344);
+            this.panel1.Size = new System.Drawing.Size(927, 538);
             this.panel1.TabIndex = 2;
             // 
             // ArtikujtListView
@@ -80,14 +81,14 @@
             IdColumn,
             this.EmriColumn,
             this.CmimiColumn});
-            this.ArtikujtListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ArtikujtListView.Dock = System.Windows.Forms.DockStyle.Left;
             this.ArtikujtListView.FullRowSelect = true;
             this.ArtikujtListView.GridLines = true;
             this.ArtikujtListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.ArtikujtListView.Location = new System.Drawing.Point(0, 0);
             this.ArtikujtListView.MultiSelect = false;
             this.ArtikujtListView.Name = "ArtikujtListView";
-            this.ArtikujtListView.Size = new System.Drawing.Size(540, 296);
+            this.ArtikujtListView.Size = new System.Drawing.Size(389, 490);
             this.ArtikujtListView.TabIndex = 1;
             this.ArtikujtListView.UseCompatibleStateImageBehavior = false;
             this.ArtikujtListView.View = System.Windows.Forms.View.Details;
@@ -115,9 +116,9 @@
             this.panel2.Controls.Add(this.PagingPanel);
             this.panel2.Controls.Add(this.DilButton);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 296);
+            this.panel2.Location = new System.Drawing.Point(0, 490);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(540, 48);
+            this.panel2.Size = new System.Drawing.Size(927, 48);
             this.panel2.TabIndex = 0;
             // 
             // PagingPanel
@@ -136,12 +137,14 @@
             this.progressBar1.Size = new System.Drawing.Size(130, 17);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 0;
+
+
             // 
             // KerkoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(540, 344);
+            this.ClientSize = new System.Drawing.Size(927, 538);
             this.Controls.Add(this.panel1);
             this.Name = "KerkoForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

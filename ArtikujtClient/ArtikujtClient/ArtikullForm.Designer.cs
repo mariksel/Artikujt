@@ -49,7 +49,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.ArtikullIRiButton = new System.Windows.Forms.Button();
             this.FshiButton = new System.Windows.Forms.Button();
-            this.KerkoButton = new System.Windows.Forms.Button();
             this.RuajButton = new System.Windows.Forms.Button();
             this.KerkoPanel = new System.Windows.Forms.Panel();
             this.artikujtListControl1 = new ArtikujtClient.ArtikujtListControl();
@@ -76,10 +75,10 @@
             this.panel1.Controls.Add(this.EmriLabel);
             this.panel1.Controls.Add(this.EmriTextBox);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(275, 0);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(432, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(546, 506);
+            this.panel1.Size = new System.Drawing.Size(535, 506);
             this.panel1.TabIndex = 0;
             // 
             // cmimiTextBox
@@ -237,17 +236,16 @@
             // 
             this.panel2.Controls.Add(this.ArtikullIRiButton);
             this.panel2.Controls.Add(this.FshiButton);
-            this.panel2.Controls.Add(this.KerkoButton);
             this.panel2.Controls.Add(this.RuajButton);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 457);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(546, 49);
+            this.panel2.Size = new System.Drawing.Size(535, 49);
             this.panel2.TabIndex = 0;
             // 
             // ArtikullIRiButton
             // 
-            this.ArtikullIRiButton.Location = new System.Drawing.Point(93, 14);
+            this.ArtikullIRiButton.Location = new System.Drawing.Point(20, 14);
             this.ArtikullIRiButton.Name = "ArtikullIRiButton";
             this.ArtikullIRiButton.Size = new System.Drawing.Size(75, 23);
             this.ArtikullIRiButton.TabIndex = 4;
@@ -257,7 +255,7 @@
             // 
             // FshiButton
             // 
-            this.FshiButton.Location = new System.Drawing.Point(255, 14);
+            this.FshiButton.Location = new System.Drawing.Point(182, 14);
             this.FshiButton.Name = "FshiButton";
             this.FshiButton.Size = new System.Drawing.Size(75, 23);
             this.FshiButton.TabIndex = 3;
@@ -265,19 +263,9 @@
             this.FshiButton.UseVisualStyleBackColor = true;
             this.FshiButton.Click += new System.EventHandler(this.FshiButton_Click);
             // 
-            // KerkoButton
-            // 
-            this.KerkoButton.Location = new System.Drawing.Point(12, 14);
-            this.KerkoButton.Name = "KerkoButton";
-            this.KerkoButton.Size = new System.Drawing.Size(75, 23);
-            this.KerkoButton.TabIndex = 2;
-            this.KerkoButton.Text = "Kerko";
-            this.KerkoButton.UseVisualStyleBackColor = true;
-            this.KerkoButton.Click += new System.EventHandler(this.KerkoButton_Click);
-            // 
             // RuajButton
             // 
-            this.RuajButton.Location = new System.Drawing.Point(174, 14);
+            this.RuajButton.Location = new System.Drawing.Point(101, 14);
             this.RuajButton.Name = "RuajButton";
             this.RuajButton.Size = new System.Drawing.Size(75, 23);
             this.RuajButton.TabIndex = 1;
@@ -288,10 +276,10 @@
             // KerkoPanel
             // 
             this.KerkoPanel.Controls.Add(this.artikujtListControl1);
-            this.KerkoPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.KerkoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.KerkoPanel.Location = new System.Drawing.Point(0, 0);
             this.KerkoPanel.Name = "KerkoPanel";
-            this.KerkoPanel.Size = new System.Drawing.Size(275, 506);
+            this.KerkoPanel.Size = new System.Drawing.Size(432, 506);
             this.KerkoPanel.TabIndex = 19;
             // 
             // artikujtListControl1
@@ -300,17 +288,16 @@
             this.artikujtListControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.artikujtListControl1.Location = new System.Drawing.Point(0, 0);
             this.artikujtListControl1.Name = "artikujtListControl1";
-            this.artikujtListControl1.Size = new System.Drawing.Size(275, 506);
+            this.artikujtListControl1.Size = new System.Drawing.Size(432, 506);
             this.artikujtListControl1.TabIndex = 6;
-            this.artikujtListControl1.Load += new System.EventHandler(this.artikujtListControl1_Load);
             // 
             // ArtikullForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(821, 506);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(967, 506);
             this.Controls.Add(this.KerkoPanel);
+            this.Controls.Add(this.panel1);
             this.Name = "ArtikullForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Artikull";
@@ -329,7 +316,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button FshiButton;
-        private System.Windows.Forms.Button KerkoButton;
         private System.Windows.Forms.Button RuajButton;
         private System.Windows.Forms.Label EmriLabel;
         private System.Windows.Forms.TextBox EmriTextBox;

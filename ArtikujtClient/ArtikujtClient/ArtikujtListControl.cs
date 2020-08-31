@@ -8,35 +8,78 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ArtikutClient.Models;
+using System.Linq.Expressions;
+using System.Diagnostics;
 
 namespace ArtikujtClient
 {
     public partial class ArtikujtListControl : UserControl
     {
+        private int currentPageIndex = 1;
+        public bool IsOnDesignMode => LicenseManager.UsageMode == LicenseUsageMode.Designtime;
+
         private Dictionary<int, Artikull> _artikujt = new Dictionary<int, Artikull>();
 
         public ArtikujtListControl()
         {
             InitializeComponent();
+
+            if(!IsOnDesignMode)
+                this.Load += new System.EventHandler(this.ArtikujtListControl_Load);
+
+            if (!IsOnDesignMode)
+            {
+                ClientSync.Instance.Synchronized += () =>
+                {
+                    Reset();
+                };
+            }
+            
+
         }
 
-        private async void ArtikujtListControl_Load(object sender, EventArgs e)
+
+
+
+        private void ArtikujtListControl_Load(object sender, EventArgs e)
         {
-            await ShowArtikujtPage(1);
+            if (!IsOnDesignMode)
+            {
+                ShowArtikujtPage(1);
+            }
         }
 
-        private async void Reset(int page = 1)
+        public void AddArtikull(Artikull artikull)
         {
-            await Task.Run(async () => {
-                await ShowArtikujtPage(page);
+            BeginInvoke((Action)(() =>
+            {
+                var artikullItem = GenerateArtikullListItem(artikull);
+                ArtikujtListPanel.Controls.Add(artikullItem);
+
+            }));
+        }
+
+        public async void Reset(int? page = null)
+        {
+            if (page is null)
+                page = currentPageIndex;
+            await Task.Run(() =>
+            {
+
+                if (!IsOnDesignMode)
+                {
+                    ShowArtikujtPage(page.Value);
+                }
+
             });
         }
 
-        private async Task ShowArtikujtPage(int page = 1)
+        private async void ShowArtikujtPage(int page = 1)
         {
+            currentPageIndex = page;
             PaginatedList<Artikull> list = null;
 
-            using(var repo = new ArtikullRepository())
+            using (var repo = new ArtikullRepository())
             {
                 list = await repo.GetPageWithArtikuj(page);
             }
@@ -55,12 +98,16 @@ namespace ArtikujtClient
         {
             BeginInvoke((Action)(() =>
             {
-                ArtikujtListPanel.Controls.Clear();
+                ArtikujtListPanel.Visible = false;
+                var items = new List<Control>();
                 foreach (var artikull in _artikujt.Values.ToArray().Reverse())
                 {
                     var artikullItem = GenerateArtikullListItem(artikull);
-                    ArtikujtListPanel.Controls.Add(artikullItem);
+                    items.Add(artikullItem);
                 }
+                ArtikujtListPanel.Controls.Clear();
+                ArtikujtListPanel.Controls.AddRange(items.ToArray()); ;
+                ArtikujtListPanel.Visible = true;
 
                 this.GeneratePagingButtions(list);
             }));
@@ -82,8 +129,9 @@ namespace ArtikujtClient
 
             artikullItem.Click += (obj, args) =>
             {
-                ArtikullForm.Artikull = artikull ;
+                ArtikullForm.Artikull = artikull;
             };
+
 
             return artikullItem;
         }
@@ -108,7 +156,8 @@ namespace ArtikujtClient
                 button.FlatStyle = FlatStyle.Flat;
                 button.FlatAppearance.BorderColor = Color.FromArgb(172, 198, 199);
                 button.Cursor = Cursors.Hand;
-                button.Click += async (sender, args) => {
+                button.Click += async (sender, args) =>
+                {
                     Reset(page.Index);
                 };
                 PagingPanel.Controls.Add(button);
@@ -134,8 +183,19 @@ namespace ArtikujtClient
         {
             using (var repo = new ArtikullRepository())
             {
-                var artikujt = await repo.GetUnprocessedArtikujtAsync();
-                ClientSync.Instance.SaveArtikujt(artikujt);
+                Enabled = false;
+                processoProbressBar.Visible = true;
+                procesoLabel.Visible = true;
+
+                var artikujt = await repo.GetUnprocessedArtikujtAsync(false);
+                var deletedartikujt = await repo.GetUnprocessedArtikujtAsync(true);
+                await ClientSync.Instance.SaveArtikujtAsync(artikujt);
+                await ClientSync.Instance.DeleteArtikujtAsync(deletedartikujt);
+
+                procesoLabel.Visible = false;
+                processoProbressBar.Visible = false;
+                Enabled = true;
+
             }
         }
 
