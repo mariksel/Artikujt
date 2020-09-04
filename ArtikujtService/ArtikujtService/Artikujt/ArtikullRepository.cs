@@ -17,25 +17,17 @@ namespace ArtikujtService.Artikujt
             _dbContext = dBContext;
         }
 
-        public async Task<ServiceResult> SaveArtikullLogs(ArtikullXmlLog[] artikullLogs)
+        public Configuration GetConfiguration()
+        {
+            return _dbContext.Configurations.First();
+        }
+
+        public async Task<ServiceResult> SaveArtikullLogs(ArtikullXmlLog[] artikullLogs, string recordType)
         {
             foreach(var artikullLog in artikullLogs)
             {
-                var countLogs = await _dbContext.ArtikullXmlLogs
-                    .Where(log => log.ArtikullId == artikullLog.ArtikullId &&
-                        (log.RecordType == RecordType.Insert || log.RecordType == RecordType.Delete))
-                    .CountAsync();
 
-                artikullLog.RecordType = RecordType.Insert;
-                if (countLogs > 0)
-                {
-                    artikullLog.RecordType = RecordType.Update;
-                    if(countLogs == 2)
-                    {
-                        throw new ArgumentException("Artikulli eshte fshire");
-                    }
-                }
-
+                artikullLog.RecordType = recordType;
 
                 await _dbContext.AddAsync(artikullLog);
                 
@@ -45,28 +37,5 @@ namespace ArtikujtService.Artikujt
             return ServiceResult.Success;
         }
 
-        public async Task<ServiceResult> DeleteArtikujtLogs(string[] artikujtIds)
-        {
-
-            foreach(var id in artikujtIds)
-            {
-                var countLogs = await _dbContext.ArtikullXmlLogs
-                    .Where(log => log.ArtikullId == id && log.RecordType == RecordType.Delete)
-                    .CountAsync();
-                if(countLogs == 0)
-                {
-                    var deleteLog = new ArtikullXmlLog
-                    {
-                        ArtikullId = id,
-                        RecordType = RecordType.Delete,
-                    };
-                    _dbContext.Add(deleteLog);
-                }
-            }
-
-            await _dbContext.SaveChangesAsync();
-
-            return ServiceResult.Success;
-        }
     }
 }

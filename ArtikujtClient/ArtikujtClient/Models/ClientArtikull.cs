@@ -22,7 +22,7 @@ namespace ArtikujtClient.Models
         public ClientArtikull() { }
         public ClientArtikull(Artikull artikull)
         {
-            Id = $"{ClientSync.Configuration.Prefix}_{artikull.Id}";
+            Id = artikull.Id;
             Emri = artikull.Emri;
             Njesia = artikull.Njesia;
             DataSkadences = artikull.DataSkadences.ToString("yyyy-MM-dd");

@@ -29,7 +29,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ArtikullForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.prefixLabel = new System.Windows.Forms.Label();
             this.cmimiTextBox = new System.Windows.Forms.TextBox();
             this.BarkodLabel = new System.Windows.Forms.Label();
             this.BarkodTextBox = new System.Windows.Forms.TextBox();
@@ -53,6 +57,7 @@
             this.KerkoPanel = new System.Windows.Forms.Panel();
             this.artikujtListControl1 = new ArtikujtClient.ArtikujtListControl();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.LlojGroupBox.SuspendLayout();
             this.panel2.SuspendLayout();
             this.KerkoPanel.SuspendLayout();
@@ -60,6 +65,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.cmimiTextBox);
             this.panel1.Controls.Add(this.BarkodLabel);
             this.panel1.Controls.Add(this.BarkodTextBox);
@@ -81,9 +87,42 @@
             this.panel1.Size = new System.Drawing.Size(535, 506);
             this.panel1.TabIndex = 0;
             // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.prefixLabel);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(535, 38);
+            this.panel3.TabIndex = 21;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label1.Location = new System.Drawing.Point(36, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(59, 21);
+            this.label1.TabIndex = 19;
+            this.label1.Text = "Prefix:";
+            // 
+            // prefixLabel
+            // 
+            this.prefixLabel.AutoSize = true;
+            this.prefixLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.prefixLabel.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.prefixLabel.Location = new System.Drawing.Point(101, 9);
+            this.prefixLabel.Name = "prefixLabel";
+            this.prefixLabel.Size = new System.Drawing.Size(16, 21);
+            this.prefixLabel.TabIndex = 20;
+            this.prefixLabel.Text = "-";
+            // 
             // cmimiTextBox
             // 
-            this.cmimiTextBox.Location = new System.Drawing.Point(306, 108);
+            this.cmimiTextBox.Location = new System.Drawing.Point(306, 132);
             this.cmimiTextBox.Name = "cmimiTextBox";
             this.cmimiTextBox.Size = new System.Drawing.Size(200, 20);
             this.cmimiTextBox.TabIndex = 18;
@@ -93,7 +132,7 @@
             // BarkodLabel
             // 
             this.BarkodLabel.AutoSize = true;
-            this.BarkodLabel.Location = new System.Drawing.Point(303, 253);
+            this.BarkodLabel.Location = new System.Drawing.Point(303, 277);
             this.BarkodLabel.Name = "BarkodLabel";
             this.BarkodLabel.Size = new System.Drawing.Size(41, 13);
             this.BarkodLabel.TabIndex = 16;
@@ -101,7 +140,7 @@
             // 
             // BarkodTextBox
             // 
-            this.BarkodTextBox.Location = new System.Drawing.Point(306, 269);
+            this.BarkodTextBox.Location = new System.Drawing.Point(306, 293);
             this.BarkodTextBox.Name = "BarkodTextBox";
             this.BarkodTextBox.Size = new System.Drawing.Size(200, 20);
             this.BarkodTextBox.TabIndex = 15;
@@ -110,7 +149,7 @@
             // TipiLabel
             // 
             this.TipiLabel.AutoSize = true;
-            this.TipiLabel.Location = new System.Drawing.Point(34, 252);
+            this.TipiLabel.Location = new System.Drawing.Point(34, 276);
             this.TipiLabel.Name = "TipiLabel";
             this.TipiLabel.Size = new System.Drawing.Size(24, 13);
             this.TipiLabel.TabIndex = 14;
@@ -120,7 +159,7 @@
             // 
             this.TipiComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TipiComboBox.FormattingEnabled = true;
-            this.TipiComboBox.Location = new System.Drawing.Point(37, 268);
+            this.TipiComboBox.Location = new System.Drawing.Point(37, 292);
             this.TipiComboBox.Name = "TipiComboBox";
             this.TipiComboBox.Size = new System.Drawing.Size(200, 21);
             this.TipiComboBox.TabIndex = 13;
@@ -129,7 +168,7 @@
             // KaTvshCheckBox
             // 
             this.KaTvshCheckBox.AutoSize = true;
-            this.KaTvshCheckBox.Location = new System.Drawing.Point(306, 157);
+            this.KaTvshCheckBox.Location = new System.Drawing.Point(306, 181);
             this.KaTvshCheckBox.Name = "KaTvshCheckBox";
             this.KaTvshCheckBox.Size = new System.Drawing.Size(72, 17);
             this.KaTvshCheckBox.TabIndex = 12;
@@ -141,7 +180,7 @@
             // 
             this.LlojGroupBox.Controls.Add(this.RadioButtonVendi);
             this.LlojGroupBox.Controls.Add(this.RadioButtonImportuar);
-            this.LlojGroupBox.Location = new System.Drawing.Point(37, 157);
+            this.LlojGroupBox.Location = new System.Drawing.Point(37, 181);
             this.LlojGroupBox.Name = "LlojGroupBox";
             this.LlojGroupBox.Size = new System.Drawing.Size(200, 71);
             this.LlojGroupBox.TabIndex = 11;
@@ -175,7 +214,7 @@
             // CmimiLabel
             // 
             this.CmimiLabel.AutoSize = true;
-            this.CmimiLabel.Location = new System.Drawing.Point(303, 92);
+            this.CmimiLabel.Location = new System.Drawing.Point(303, 116);
             this.CmimiLabel.Name = "CmimiLabel";
             this.CmimiLabel.Size = new System.Drawing.Size(34, 13);
             this.CmimiLabel.TabIndex = 8;
@@ -183,7 +222,7 @@
             // 
             // DataSkadencesPicker
             // 
-            this.DataSkadencesPicker.Location = new System.Drawing.Point(37, 108);
+            this.DataSkadencesPicker.Location = new System.Drawing.Point(37, 132);
             this.DataSkadencesPicker.Name = "DataSkadencesPicker";
             this.DataSkadencesPicker.Size = new System.Drawing.Size(200, 20);
             this.DataSkadencesPicker.TabIndex = 6;
@@ -192,7 +231,7 @@
             // DataSkadencesLabel
             // 
             this.DataSkadencesLabel.AutoSize = true;
-            this.DataSkadencesLabel.Location = new System.Drawing.Point(34, 91);
+            this.DataSkadencesLabel.Location = new System.Drawing.Point(34, 115);
             this.DataSkadencesLabel.Name = "DataSkadencesLabel";
             this.DataSkadencesLabel.Size = new System.Drawing.Size(87, 13);
             this.DataSkadencesLabel.TabIndex = 5;
@@ -201,7 +240,7 @@
             // NjesiaLabel
             // 
             this.NjesiaLabel.AutoSize = true;
-            this.NjesiaLabel.Location = new System.Drawing.Point(303, 28);
+            this.NjesiaLabel.Location = new System.Drawing.Point(303, 52);
             this.NjesiaLabel.Name = "NjesiaLabel";
             this.NjesiaLabel.Size = new System.Drawing.Size(36, 13);
             this.NjesiaLabel.TabIndex = 4;
@@ -209,7 +248,7 @@
             // 
             // NjesiaTextBox
             // 
-            this.NjesiaTextBox.Location = new System.Drawing.Point(306, 44);
+            this.NjesiaTextBox.Location = new System.Drawing.Point(306, 68);
             this.NjesiaTextBox.Name = "NjesiaTextBox";
             this.NjesiaTextBox.Size = new System.Drawing.Size(200, 20);
             this.NjesiaTextBox.TabIndex = 3;
@@ -218,7 +257,7 @@
             // EmriLabel
             // 
             this.EmriLabel.AutoSize = true;
-            this.EmriLabel.Location = new System.Drawing.Point(34, 28);
+            this.EmriLabel.Location = new System.Drawing.Point(34, 52);
             this.EmriLabel.Name = "EmriLabel";
             this.EmriLabel.Size = new System.Drawing.Size(27, 13);
             this.EmriLabel.TabIndex = 2;
@@ -226,7 +265,7 @@
             // 
             // EmriTextBox
             // 
-            this.EmriTextBox.Location = new System.Drawing.Point(37, 44);
+            this.EmriTextBox.Location = new System.Drawing.Point(37, 68);
             this.EmriTextBox.Name = "EmriTextBox";
             this.EmriTextBox.Size = new System.Drawing.Size(200, 20);
             this.EmriTextBox.TabIndex = 1;
@@ -298,11 +337,14 @@
             this.ClientSize = new System.Drawing.Size(967, 506);
             this.Controls.Add(this.KerkoPanel);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ArtikullForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Artikull";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.LlojGroupBox.ResumeLayout(false);
             this.LlojGroupBox.PerformLayout();
             this.panel2.ResumeLayout(false);
@@ -336,5 +378,8 @@
         private System.Windows.Forms.TextBox cmimiTextBox;
         private System.Windows.Forms.Panel KerkoPanel;
         private ArtikujtListControl artikujtListControl1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label prefixLabel;
     }
 }

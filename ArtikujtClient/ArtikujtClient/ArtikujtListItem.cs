@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ArtikutClient.Models;
 using ChangeDetector;
+using ArtikujtClient.Models;
 
 namespace ArtikujtClient
 {
@@ -23,8 +24,8 @@ namespace ArtikujtClient
         public Label CmimiLabel => cmimiLabel;
         public Button SyncButton => syncButton;
 
-        public int Id {
-            set => IdLabel.Text = value.ToString();
+        public string Id {
+            set => IdLabel.Text = value;
         }
         public string Emri
         {
@@ -49,7 +50,7 @@ namespace ArtikujtClient
             if(!IsOnDesignMode)
                 this.SizeChanged += new System.EventHandler(this.ArtikujtListItem_SizeChanged);
 
-            if (Artikull.IsDeleted)
+            if (Artikull.RecordType == RecordType.Delete)
                 deletedLabel.Visible = true;
             OnProcess(Artikull.IsProcessing);
 
@@ -71,9 +72,9 @@ namespace ArtikujtClient
                 OnProcess(isSaving);
             };
 
-            artikull.IsDeletedChanged += (isDeleted) =>
+            artikull.IsRecordTypeChanged += (recordType) =>
             {
-                if (isDeleted)
+                if (recordType == RecordType.Delete)
                     deletedLabel.Visible = true;
             };
 
@@ -107,14 +108,19 @@ namespace ArtikujtClient
             if (!Artikull.IsProcessed)
             {
                 OnProcess();
-                if (Artikull.IsDeleted)
+                switch(Artikull.RecordType)
                 {
-                    await ClientSync.Instance.DeleteArtikujtAsync(Artikull);
+                    case RecordType.Insert:
+                        await ClientSync.Instance.CreateArtikujtAsync(Artikull);
+                        break;
+                    case RecordType.Update:
+                        await ClientSync.Instance.UpdateArtikujtAsync(Artikull);
+                        break;
+                    case RecordType.Delete:
+                        await ClientSync.Instance.DeleteArtikujtAsync(Artikull);
+                        break;
                 }
-                else
-                {
-                    await ClientSync.Instance.SaveArtikujtAsync(Artikull);
-                }
+                
                 OnProcess(false);
             }
         }

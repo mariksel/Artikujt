@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,6 +7,8 @@
 	<PropertyGroup>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);1591</NoWarn>
+		<UserSecretsId>9f1b2314-4749-475c-97f4-7bbdd4ca497c</UserSecretsId>
+		<ApplicationIcon>server.ico</ApplicationIcon>
 	</PropertyGroup>
 
 	<ItemGroup>

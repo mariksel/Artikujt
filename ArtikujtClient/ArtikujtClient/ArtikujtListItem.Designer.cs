@@ -31,13 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.idLabel = new System.Windows.Forms.Label();
             this.innerPlanel = new System.Windows.Forms.Panel();
+            this.contentPanel = new System.Windows.Forms.Panel();
+            this.deletedLabel = new System.Windows.Forms.Label();
             this.emriLabel = new System.Windows.Forms.Label();
             this.cmimiLabel = new System.Windows.Forms.Label();
             this.syncButton = new System.Windows.Forms.Button();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.contentPanel = new System.Windows.Forms.Panel();
-            this.deletedLabel = new System.Windows.Forms.Label();
             this.innerPlanel.SuspendLayout();
             this.contentPanel.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +51,7 @@
             this.idLabel.Location = new System.Drawing.Point(0, 0);
             this.idLabel.Name = "idLabel";
             this.idLabel.Padding = new System.Windows.Forms.Padding(7, 5, 5, 5);
-            this.idLabel.Size = new System.Drawing.Size(42, 54);
+            this.idLabel.Size = new System.Drawing.Size(102, 54);
             this.idLabel.TabIndex = 0;
             this.idLabel.Text = "Id";
             this.idLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -69,15 +69,43 @@
             this.innerPlanel.Size = new System.Drawing.Size(567, 54);
             this.innerPlanel.TabIndex = 4;
             // 
+            // contentPanel
+            // 
+            this.contentPanel.Controls.Add(this.deletedLabel);
+            this.contentPanel.Controls.Add(this.emriLabel);
+            this.contentPanel.Controls.Add(this.cmimiLabel);
+            this.contentPanel.Controls.Add(this.idLabel);
+            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contentPanel.Location = new System.Drawing.Point(0, 0);
+            this.contentPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.contentPanel.Name = "contentPanel";
+            this.contentPanel.Size = new System.Drawing.Size(532, 54);
+            this.contentPanel.TabIndex = 6;
+            // 
+            // deletedLabel
+            // 
+            this.deletedLabel.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.deletedLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deletedLabel.ForeColor = System.Drawing.Color.LightCoral;
+            this.deletedLabel.Location = new System.Drawing.Point(41, 11);
+            this.deletedLabel.Margin = new System.Windows.Forms.Padding(0);
+            this.deletedLabel.Name = "deletedLabel";
+            this.deletedLabel.Padding = new System.Windows.Forms.Padding(6);
+            this.deletedLabel.Size = new System.Drawing.Size(474, 37);
+            this.deletedLabel.TabIndex = 6;
+            this.deletedLabel.Text = "Artikulli eshte fshire";
+            this.deletedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.deletedLabel.Visible = false;
+            // 
             // emriLabel
             // 
             this.emriLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.emriLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.emriLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.emriLabel.Location = new System.Drawing.Point(42, 0);
+            this.emriLabel.Location = new System.Drawing.Point(102, 0);
             this.emriLabel.Name = "emriLabel";
             this.emriLabel.Padding = new System.Windows.Forms.Padding(5);
-            this.emriLabel.Size = new System.Drawing.Size(399, 54);
+            this.emriLabel.Size = new System.Drawing.Size(339, 54);
             this.emriLabel.TabIndex = 4;
             this.emriLabel.Text = "Emri";
             this.emriLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -136,34 +164,6 @@
             this.toolTip1.InitialDelay = 100;
             this.toolTip1.ReshowDelay = 20;
             this.toolTip1.Tag = "";
-            // 
-            // contentPanel
-            // 
-            this.contentPanel.Controls.Add(this.deletedLabel);
-            this.contentPanel.Controls.Add(this.emriLabel);
-            this.contentPanel.Controls.Add(this.cmimiLabel);
-            this.contentPanel.Controls.Add(this.idLabel);
-            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contentPanel.Location = new System.Drawing.Point(0, 0);
-            this.contentPanel.Margin = new System.Windows.Forms.Padding(0);
-            this.contentPanel.Name = "contentPanel";
-            this.contentPanel.Size = new System.Drawing.Size(532, 54);
-            this.contentPanel.TabIndex = 6;
-            // 
-            // deletedLabel
-            // 
-            this.deletedLabel.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.deletedLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deletedLabel.ForeColor = System.Drawing.Color.LightCoral;
-            this.deletedLabel.Location = new System.Drawing.Point(41, 11);
-            this.deletedLabel.Margin = new System.Windows.Forms.Padding(0);
-            this.deletedLabel.Name = "deletedLabel";
-            this.deletedLabel.Padding = new System.Windows.Forms.Padding(6);
-            this.deletedLabel.Size = new System.Drawing.Size(474, 37);
-            this.deletedLabel.TabIndex = 6;
-            this.deletedLabel.Text = "Artikulli eshte fshire";
-            this.deletedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.deletedLabel.Visible = false;
             // 
             // ArtikujtListItem
             // 

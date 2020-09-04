@@ -7,6 +7,7 @@ namespace ArtikutClient.Database
     {
         public DbSet<Artikull> Artikujt { get; set; }
         public DbSet<ArtikullXmlLog> ArtikullXmlLogs { get; set; }
+        public DbSet<Configuration> Configurations { get; set; }
 
         public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options):
             base(options)

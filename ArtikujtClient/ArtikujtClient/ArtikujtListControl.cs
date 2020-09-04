@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using ArtikutClient.Models;
 using System.Linq.Expressions;
 using System.Diagnostics;
+using ArtikujtClient.Models;
 
 namespace ArtikujtClient
 {
@@ -18,7 +19,7 @@ namespace ArtikujtClient
         private int currentPageIndex = 1;
         public bool IsOnDesignMode => LicenseManager.UsageMode == LicenseUsageMode.Designtime;
 
-        private Dictionary<int, Artikull> _artikujt = new Dictionary<int, Artikull>();
+        private Dictionary<string, Artikull> _artikujt = new Dictionary<string, Artikull>();
 
         public ArtikujtListControl()
         {
@@ -84,7 +85,7 @@ namespace ArtikujtClient
                 list = await repo.GetPageWithArtikuj(page);
             }
 
-            _artikujt = new Dictionary<int, Artikull>();
+            _artikujt = new Dictionary<string, Artikull>();
 
             foreach (var artikull in list.Models)
             {
@@ -187,9 +188,11 @@ namespace ArtikujtClient
                 processoProbressBar.Visible = true;
                 procesoLabel.Visible = true;
 
-                var artikujt = await repo.GetUnprocessedArtikujtAsync(false);
-                var deletedartikujt = await repo.GetUnprocessedArtikujtAsync(true);
-                await ClientSync.Instance.SaveArtikujtAsync(artikujt);
+                var createdartikujt = await repo.GetUnprocessedArtikujtAsync(RecordType.Insert);
+                var updatedartikujt = await repo.GetUnprocessedArtikujtAsync(RecordType.Update);
+                var deletedartikujt = await repo.GetUnprocessedArtikujtAsync(RecordType.Delete);
+                await ClientSync.Instance.CreateArtikujtAsync(createdartikujt);
+                await ClientSync.Instance.UpdateArtikujtAsync(updatedartikujt);
                 await ClientSync.Instance.DeleteArtikujtAsync(deletedartikujt);
 
                 procesoLabel.Visible = false;

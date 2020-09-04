@@ -1,0 +1,2173 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EntityChange</name>
+    </assembly>
+    <members>
+        <member name="T:EntityChange.ChangeOperation">
+            <summary>
+            The type of change operation
+            </summary>
+        </member>
+        <member name="F:EntityChange.ChangeOperation.Add">
+            <summary>
+            The change is an addition to a dictionary or collection.
+            </summary>
+        </member>
+        <member name="F:EntityChange.ChangeOperation.Remove">
+            <summary>
+            The change is a removal from a dictionary or collection.
+            </summary>
+        </member>
+        <member name="F:EntityChange.ChangeOperation.Replace">
+            <summary>
+            The change is a property value replacement.
+            </summary>
+        </member>
+        <member name="T:EntityChange.ChangeRecord">
+            <summary>
+            An entity change record
+            </summary>
+        </member>
+        <member name="P:EntityChange.ChangeRecord.PropertyName">
+            <summary>
+            Gets or sets the name of the property that was changed.
+            </summary>
+            <value>
+            The name of the property that was changed.
+            </value>
+        </member>
+        <member name="P:EntityChange.ChangeRecord.DisplayName">
+            <summary>
+            Gets or sets the display name for the changed property.
+            </summary>
+            <value>
+            The display name for the changed property.
+            </value>
+        </member>
+        <member name="P:EntityChange.ChangeRecord.Path">
+            <summary>
+            Gets or sets the object graph change path.
+            </summary>
+            <value>
+            The object graph change path.
+            </value>
+        </member>
+        <member name="P:EntityChange.ChangeRecord.Operation">
+            <summary>
+            Gets or sets the type of change operation.
+            </summary>
+            <value>
+            The type of change operation.
+            </value>
+        </member>
+        <member name="P:EntityChange.ChangeRecord.OriginalValue">
+            <summary>
+            Gets or sets the original value.
+            </summary>
+            <value>
+            The original value.
+            </value>
+        </member>
+        <member name="P:EntityChange.ChangeRecord.CurrentValue">
+            <summary>
+            Gets or sets the current value.
+            </summary>
+            <value>
+            The current value.
+            </value>
+        </member>
+        <member name="P:EntityChange.ChangeRecord.OriginalFormatted">
+            <summary>
+            Gets or sets the original value formatted as a <see cref="T:System.String"/>.
+            </summary>
+            <value>
+            The original value formatted as a <see cref="T:System.String"/>.
+            </value>
+        </member>
+        <member name="P:EntityChange.ChangeRecord.CurrentFormatted">
+            <summary>
+            Gets or sets the current value formatted as a <see cref="T:System.String"/>.
+            </summary>
+            <value>
+            The current value formatted as a <see cref="T:System.String"/>.
+            </value>
+        </member>
+        <member name="T:EntityChange.CollectionComparison">
+            <summary>
+            The type of collection comparison.
+            </summary>
+        </member>
+        <member name="F:EntityChange.CollectionComparison.CollectionIndexer">
+            <summary>
+            Compare collection by index position.
+            </summary>
+        </member>
+        <member name="F:EntityChange.CollectionComparison.ObjectEquality">
+            <summary>
+            Compare collection by element equality.
+            </summary>
+        </member>
+        <member name="T:EntityChange.Configuration">
+            <summary>
+            A class defining the configuration.
+            </summary>
+        </member>
+        <member name="M:EntityChange.Configuration.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.Configuration"/> class.
+            </summary>
+        </member>
+        <member name="P:EntityChange.Configuration.AutoMap">
+            <summary>
+            Gets or sets a value indicating whether to automatic map properties of the class by default.
+            </summary>
+            <value>
+              <c>true</c> to automatic map properties; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:EntityChange.Configuration.Mapping">
+            <summary>
+            Gets the mapped class definitions.
+            </summary>
+            <value>
+            The mapped class definitions.
+            </value>
+        </member>
+        <member name="M:EntityChange.Configuration.Configure(System.Action{EntityChange.Fluent.ConfigurationBuilder})">
+            <summary>
+            Configures the comparison with specified fluent <paramref name="builder"/>.
+            </summary>
+            <param name="builder">The fluent configuration builder <see langword="delegate"/>.</param>
+        </member>
+        <member name="M:EntityChange.Configuration.GetMapping(System.Type)">
+            <summary>
+            Gets the <see cref="T:EntityChange.EntityMapping"/> for the specified <paramref name="type"/>.
+            </summary>
+            <param name="type">The type to get mapping for.</param>
+            <returns><see cref="T:EntityChange.EntityMapping"/> for the specified type.</returns>
+        </member>
+        <member name="P:EntityChange.Configuration.Default">
+            <summary>
+            Gets the default configuration.
+            </summary>
+            <value>
+            The default configuration.
+            </value>
+        </member>
+        <member name="T:EntityChange.Delta`1">
+            <summary>
+            The delta result of two lists
+            </summary>
+            <typeparam name="TItem">The type of the item.</typeparam>
+        </member>
+        <member name="P:EntityChange.Delta`1.Matched">
+            <summary>
+            Gets or sets the list of items that matched and exist in both lists.
+            </summary>
+            <value>
+            The list of items that matched.
+            </value>
+        </member>
+        <member name="P:EntityChange.Delta`1.Created">
+            <summary>
+            Gets or sets the list of new items created.
+            </summary>
+            <value>
+            The list of new items created..
+            </value>
+        </member>
+        <member name="P:EntityChange.Delta`1.Deleted">
+            <summary>
+            Gets or sets the list of items deleted.
+            </summary>
+            <value>
+            The list of items deleted.
+            </value>
+        </member>
+        <member name="T:EntityChange.DictionaryWrapper`2">
+            <summary>
+            Generic dictionary wrapper to allow comparison by object type
+            </summary>
+            <typeparam name="TKey">The type of the key.</typeparam>
+            <typeparam name="TValue">The type of the value.</typeparam>
+        </member>
+        <member name="M:EntityChange.DictionaryWrapper`2.#ctor(System.Collections.Generic.IDictionary{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.DictionaryWrapper`2"/> class.
+            </summary>
+            <param name="dictionary">The dictionary.</param>
+        </member>
+        <member name="M:EntityChange.DictionaryWrapper`2.GetKeys">
+            <summary>
+            Gets the underling dictionary keys.
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerable"/> of keys</returns>
+        </member>
+        <member name="M:EntityChange.DictionaryWrapper`2.GetValue(System.Object)">
+            <summary>
+            Gets the value for the specified <paramref name="key"/>.
+            </summary>
+            <param name="key">The dictionary key.</param>
+            <returns>The value for the specified <paramref name="key"/></returns>
+        </member>
+        <member name="T:EntityChange.EntityComparer">
+            <summary>
+            A class to compare two entities generating a change list. 
+            </summary>
+        </member>
+        <member name="M:EntityChange.EntityComparer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.EntityComparer"/> class.
+            </summary>
+        </member>
+        <member name="M:EntityChange.EntityComparer.#ctor(EntityChange.Configuration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.EntityComparer"/> class.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="P:EntityChange.EntityComparer.Configuration">
+            <summary>
+            Gets the generator configuration.
+            </summary>
+            <value>
+            The generator configuration.
+            </value>
+        </member>
+        <member name="M:EntityChange.EntityComparer.Compare``1(``0,``0)">
+            <summary>
+            Compares the specified <paramref name="original"/> and <paramref name="current"/> entities.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="original">The original entity.</param>
+            <param name="current">The current entity.</param>
+            <returns>A list of changes.</returns>
+        </member>
+        <member name="T:EntityChange.EntityMapping">
+            <summary>
+            Mapping information on how to compare a class
+            </summary>
+        </member>
+        <member name="M:EntityChange.EntityMapping.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.EntityMapping"/> class.
+            </summary>
+        </member>
+        <member name="M:EntityChange.EntityMapping.#ctor(EntityChange.Reflection.TypeAccessor)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.EntityMapping"/> class.
+            </summary>
+            <param name="typeAccessor">The type accessor.</param>
+        </member>
+        <member name="P:EntityChange.EntityMapping.AutoMap">
+            <summary>
+            Gets or sets a value indicating whether to automatic map properties of the class.
+            </summary>
+            <value>
+              <c>true</c> to automatic map properties; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:EntityChange.EntityMapping.Ignored">
+            <summary>
+            Gets or sets a value indicating whether the class is ignored.
+            </summary>
+            <value>
+              <c>true</c> if ignored; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:EntityChange.EntityMapping.Mapped">
+            <summary>
+            Gets or sets a value indicating whether <see cref="P:EntityChange.EntityMapping.AutoMap"/> has completed.
+            </summary>
+            <value>
+              <c>true</c> if AutoMap completed; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:EntityChange.EntityMapping.TypeAccessor">
+            <summary>
+            Gets or sets the type accessor.
+            </summary>
+            <value>
+            The type accessor.
+            </value>
+        </member>
+        <member name="P:EntityChange.EntityMapping.Members">
+            <summary>
+            Gets the class mapped members.
+            </summary>
+            <value>
+            The class mapped members.
+            </value>
+        </member>
+        <member name="P:EntityChange.EntityMapping.SyncRoot">
+            <summary>
+            Gets the synchronize <see langword="lock"/> object.
+            </summary>
+            <value>
+            The synchronize object.
+            </value>
+        </member>
+        <member name="T:EntityChange.EntityProfile`1">
+            <summary>
+            A <see langword="base"/> class for creating entity comparision profiles
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+        </member>
+        <member name="P:EntityChange.EntityProfile`1.EntityChange#IEntityProfile#EntityType">
+            <summary>
+            Gets or sets the type of the entity.
+            </summary>
+            <value>
+            The type of the entity.
+            </value>
+        </member>
+        <member name="M:EntityChange.EntityProfile`1.EntityChange#IEntityProfile#Register(EntityChange.EntityMapping)">
+            <summary>
+            Registers the specified class mapping.
+            </summary>
+            <param name="entityMapping">The class mapping.</param>
+        </member>
+        <member name="M:EntityChange.EntityProfile`1.Configure">
+            <summary>
+            Configure the <typeparamref name="TEntity"/> mapping information.
+            </summary>
+        </member>
+        <member name="T:EntityChange.Extensions.EnumerableExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.Collections.Generic.IEnumerable`1"/>
+            </summary>
+        </member>
+        <member name="M:EntityChange.Extensions.EnumerableExtensions.ToDelimitedString``1(System.Collections.Generic.IEnumerable{``0},System.String,System.Func{System.String,System.String})">
+            <summary>
+            Converts an IEnumerable of values to a delimited string.
+            </summary>
+            <typeparam name="T">The type of objects to delimit.</typeparam>
+            <param name="values">The IEnumerable of values to convert.</param>
+            <param name="delimiter">The string delimiter.</param>
+            <param name="escapeDelimiter">A delegate used to escape the delimiter contained in the value.</param>
+            <returns>
+            A delimited string of the values.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Extensions.EnumerableExtensions.DeltaCompare``1(System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEnumerable{``0},System.Collections.Generic.IEqualityComparer{``0})">
+            <summary>
+            Compares the specified existing and current lists returning the delta between them.
+            </summary>
+            <typeparam name="TItem">The type of the item.</typeparam>
+            <param name="existing">The existing list of items.</param>
+            <param name="current">The new and current list of items.</param>
+            <param name="comparer">The comparer the <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> used to compare the items.</param>
+            <returns>The <see cref="T:EntityChange.Delta`1"/> result of two lists.</returns>
+            <exception cref="T:System.ArgumentNullException">when <paramref name="existing"/> or <paramref name="current"/> lists are null.</exception>
+        </member>
+        <member name="T:EntityChange.Extensions.StringExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.String"/> type.
+            </summary>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.Truncate(System.String,System.Int32,System.String)">
+            <summary>
+            Truncates the specified text.
+            </summary>
+            <param name="text">The text to truncate.</param>
+            <param name="keep">The number of characters to keep.</param>
+            <param name="ellipsis">The ellipsis string to use when truncating. (Default ...)</param>
+            <returns>
+            A truncate string.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.NormalizeLineEndings(System.String)">
+            <summary>
+            Normalizes the line endings.
+            </summary>
+            <param name="text">The text to normalize.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.IsNullOrEmpty(System.String)">
+            <summary>
+            Indicates whether the specified String object is null or an empty string
+            </summary>
+            <param name="item">A String reference</param>
+            <returns>
+                <c>true</c> if is null or empty; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.IsNullOrWhiteSpace(System.String)">
+            <summary>
+            Indicates whether a specified string is null, empty, or consists only of white-space characters
+            </summary>
+            <param name="item">A String reference</param>
+            <returns>
+                 <c>true</c> if is null or empty; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.HasValue(System.String)">
+            <summary>
+            Determines whether the specified string is not <see cref="M:EntityChange.Extensions.StringExtensions.IsNullOrEmpty(System.String)"/>.
+            </summary>
+            <param name="value">The value to check.</param>
+            <returns>
+              <c>true</c> if the specified <paramref name="value"/> is not <see cref="M:EntityChange.Extensions.StringExtensions.IsNullOrEmpty(System.String)"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.FormatWith(System.String,System.Object[])">
+            <summary>
+            Uses the string as a format
+            </summary>
+            <param name="format">A String reference</param>
+            <param name="args">Object parameters that should be formatted</param>
+            <returns>Formatted string</returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.FormatAs(System.Object,System.String)">
+            <summary>
+            Applies a format to the item
+            </summary>
+            <param name="item">Item to format</param>
+            <param name="format">Format string</param>
+            <returns>Formatted string</returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.FormatName(System.String,System.Object)">
+            <summary>
+            Uses the string as a format.
+            </summary>
+            <param name="format">A String reference</param>
+            <param name="source">Object that should be formatted</param>
+            <returns>Formatted string</returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.FormatNameAs(System.Object,System.String)">
+            <summary>
+            Applies a format to the item
+            </summary>
+            <param name="item">Item to format</param>
+            <param name="format">Format string</param>
+            <returns>Formatted string</returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.ToCamelCase(System.String)">
+            <summary>
+            Converts a string to use camelCase.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>The to camel case. </returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.ToPascalCase(System.String)">
+            <summary>
+            Converts a string to use PascalCase.
+            </summary>
+            <param name="value">Text to convert</param>
+            <returns>The string</returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.ToPascalCase(System.String,System.Text.RegularExpressions.Regex)">
+            <summary>
+            Converts a string to use PascalCase.
+            </summary>
+            <param name="value">Text to convert</param>
+            <param name="splitRegex">Regular Expression to split words on.</param>
+            <returns>The string</returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.ToSpacedWords(System.String)">
+            <summary>
+            Takes a NameIdentifier and spaces it out into words "Name Identifier".
+            </summary>
+            <param name="value">The value to convert.</param>
+            <returns>The string</returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.RemoveWhiteSpace(System.String)">
+            <summary>
+            Removes all whitespace from a string.
+            </summary>
+            <param name="s">Initial string.</param>
+            <returns>String with no whitespace.</returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.RemoveInvisible(System.String)">
+            <summary>
+            Strips NewLines and Tabs
+            </summary>
+            <param name="s">The string to strip.</param>
+            <returns>Stripped string.</returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.AppendLine(System.Text.StringBuilder,System.String,System.Object[])">
+            <summary>
+            Appends a copy of the specified string followed by the default line terminator to the end of the StringBuilder object.
+            </summary>
+            <param name="sb">The StringBuilder instance to append to.</param>
+            <param name="format">A composite format string.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.AppendIf(System.Text.StringBuilder,System.String,System.Func{System.String,System.Boolean})">
+            <summary>
+            Appends a copy of the specified string if <paramref name="condition"/> is met.
+            </summary>
+            <param name="sb">The StringBuilder instance to append to.</param>
+            <param name="text">The string to append.</param>
+            <param name="condition">The condition delegate to evaluate. If condition is null, String.IsNullOrWhiteSpace method will be used.</param>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.AppendLineIf(System.Text.StringBuilder,System.String,System.Func{System.String,System.Boolean})">
+            <summary>
+            Appends a copy of the specified string followed by the default line terminator if <paramref name="condition"/> is met.
+            </summary>
+            <param name="sb">The StringBuilder instance to append to.</param>
+            <param name="text">The string to append.</param>
+            <param name="condition">The condition delegate to evaluate. If condition is null, String.IsNullOrWhiteSpace method will be used.</param>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.IsMixedCase(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Do any of the strings contain both uppercase and lowercase characters?
+            </summary>
+            <param name="values">String values.</param>
+            <returns>True if any contain mixed cases.</returns>
+        </member>
+        <member name="M:EntityChange.Extensions.StringExtensions.IsMixedCase(System.String)">
+            <summary>
+            Does string contain both uppercase and lowercase characters?
+            </summary>
+            <param name="s">The value.</param>
+            <returns>True if contain mixed case.</returns>
+        </member>
+        <member name="T:EntityChange.Fluent.CollectionMappingBuilder`2">
+            <summary>
+            Fluent builder for an entity property.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <typeparam name="TProperty">The type of the property.</typeparam>
+        </member>
+        <member name="M:EntityChange.Fluent.CollectionMappingBuilder`2.#ctor(EntityChange.MemberMapping)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.Fluent.CollectionMappingBuilder`2"/> class.
+            </summary>
+            <param name="memberMapping">The member mapping.</param>
+        </member>
+        <member name="P:EntityChange.Fluent.CollectionMappingBuilder`2.MemberMapping">
+            <summary>
+            Gets the current member mapping.
+            </summary>
+            <value>
+            The current member mapping.
+            </value>
+        </member>
+        <member name="M:EntityChange.Fluent.CollectionMappingBuilder`2.Ignore(System.Boolean)">
+            <summary>
+            Ignore this property during data generation.
+            </summary>
+            <param name="value">if set to <c>true</c> this property will be ignored.</param>
+            <returns>
+            Fluent builder for a collection property.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Fluent.CollectionMappingBuilder`2.ElementEquality(System.Func{System.Object,System.Object,System.Boolean})">
+            <summary>
+            Sets the collection element equality <see langword="delegate" />.
+            </summary>
+            <param name="equalityFactory">The collection element equality <see langword="delegate" />.</param>
+            <returns>
+            Fluent builder for a collection property.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Fluent.CollectionMappingBuilder`2.ElementFormatter(System.Func{System.Object,System.String})">
+            <summary>
+            Sets the collection element string formatter <see langword="delegate" />.
+            </summary>
+            <param name="formatterFactory">The collection element string formatter factory.</param>
+            <returns>
+            Fluent builder for a collection property.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Fluent.CollectionMappingBuilder`2.CollectionComparison(EntityChange.CollectionComparison)">
+            <summary>
+            Sets the collection element comparison option.
+            </summary>
+            <param name="comparison">The collection element comparison option.</param>
+            <returns>
+            Fluent builder for a collection property.
+            </returns>
+        </member>
+        <member name="T:EntityChange.Fluent.ConfigurationBuilder">
+            <summary>
+            Fluent <see cref="P:EntityChange.Fluent.ConfigurationBuilder.Configuration"/> builder.
+            </summary>
+        </member>
+        <member name="M:EntityChange.Fluent.ConfigurationBuilder.#ctor(EntityChange.Configuration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.Fluent.ConfigurationBuilder"/> class.
+            </summary>
+            <param name="configuration">The configuration to update.</param>
+        </member>
+        <member name="P:EntityChange.Fluent.ConfigurationBuilder.Configuration">
+            <summary>
+            Gets the current configuration.
+            </summary>
+            <value>
+            The current configuration.
+            </value>
+        </member>
+        <member name="M:EntityChange.Fluent.ConfigurationBuilder.AutoMap(System.Boolean)">
+            <summary>
+            Sets a value indicating whether to automatic map properties of the entity by default
+            </summary>
+            <param name="value"><c>true</c> to automatic map properties; otherwise, <c>false</c>.</param>
+            <returns>
+            A fluent builder to configure comparison.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Fluent.ConfigurationBuilder.Entity``1(System.Action{EntityChange.Fluent.EntityMappingBuilder{``0}})">
+            <summary>
+            Fluent configuration for <see cref="T:EntityChange.EntityMapping"/>.
+            </summary>
+            <typeparam name="TEntity">The type of the entity for the class mapping.</typeparam>
+            <param name="builder">The fluent builder for <see cref="T:EntityChange.EntityMapping"/>.</param>
+            <returns>
+            A fluent builder to configure comparison.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="builder"/> parameter is <see langword="null" />.</exception>
+        </member>
+        <member name="M:EntityChange.Fluent.ConfigurationBuilder.Profile``1">
+            <summary>
+            Add the profile of type <typeparamref name="TProfile"/> to the configuration
+            </summary>
+            <typeparam name="TProfile">The type of the profile.</typeparam>
+            <returns>
+            A fluent builder to configure comparison.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Fluent.ConfigurationBuilder.Profile(EntityChange.IEntityProfile)">
+            <summary>
+            Add the specified <paramref name="profile" /> to the configuration
+            </summary>
+            <param name="profile">The profile to add to the configuration.</param>
+            <returns>
+            A fluent builder to configure comparison.
+            </returns>
+        </member>
+        <member name="T:EntityChange.Fluent.EntityMappingBuilder`1">
+            <summary>
+            Fluent builder for <see cref="P:EntityChange.Fluent.EntityMappingBuilder`1.EntityMapping"/>.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+        </member>
+        <member name="M:EntityChange.Fluent.EntityMappingBuilder`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.Fluent.EntityMappingBuilder`1"/> class.
+            </summary>
+        </member>
+        <member name="M:EntityChange.Fluent.EntityMappingBuilder`1.#ctor(EntityChange.EntityMapping)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.Fluent.EntityMappingBuilder`1"/> class.
+            </summary>
+            <param name="entityMapping">The class mapping.</param>
+        </member>
+        <member name="P:EntityChange.Fluent.EntityMappingBuilder`1.EntityMapping">
+            <summary>
+            Gets or sets the class mapping.
+            </summary>
+            <value>
+            The class mapping.
+            </value>
+        </member>
+        <member name="M:EntityChange.Fluent.EntityMappingBuilder`1.AutoMap(System.Boolean)">
+            <summary>
+            Sets a value indicating whether to automatic map properties of the class.
+            </summary>
+            <param name="value"><c>true</c> to automatic map properties; otherwise, <c>false</c>.</param>
+            <returns>A fluent builder for class mapping.</returns>
+        </member>
+        <member name="M:EntityChange.Fluent.EntityMappingBuilder`1.Property``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Start a fluent configuration for the specified <paramref name="property"/>.
+            </summary>
+            <typeparam name="TProperty">The type of the property.</typeparam>
+            <param name="property">The source property to configure.</param>
+            <returns>A fluent member builder for the specified property.</returns>
+        </member>
+        <member name="M:EntityChange.Fluent.EntityMappingBuilder`1.Collection``1(System.Linq.Expressions.Expression{System.Func{`0,``0}})">
+            <summary>
+            Start a fluent configuration for the specified <paramref name="collection"/>.
+            </summary>
+            <typeparam name="TProperty">The type of the property.</typeparam>
+            <param name="collection">The source property to configure.</param>
+            <returns>A fluent member builder for the specified property.</returns>
+        </member>
+        <member name="T:EntityChange.Fluent.MemberMappingBuilder`2">
+            <summary>
+            Fluent builder for an entity property.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <typeparam name="TProperty">The type of the property.</typeparam>
+        </member>
+        <member name="M:EntityChange.Fluent.MemberMappingBuilder`2.#ctor(EntityChange.MemberMapping)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.Fluent.MemberMappingBuilder`2"/> class.
+            </summary>
+            <param name="memberMapping">The member mapping.</param>
+        </member>
+        <member name="P:EntityChange.Fluent.MemberMappingBuilder`2.MemberMapping">
+            <summary>
+            Gets the current member mapping.
+            </summary>
+            <value>
+            The current member mapping.
+            </value>
+        </member>
+        <member name="M:EntityChange.Fluent.MemberMappingBuilder`2.Ignore(System.Boolean)">
+            <summary>
+            Ignore this property during entity comparison.
+            </summary>
+            <param name="value">if set to <c>true</c> this property will be ignored.</param>
+            <returns>
+            Fluent builder for an entity property.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Fluent.MemberMappingBuilder`2.Equality(System.Func{`1,`1,System.Boolean})">
+            <summary>
+            Sets the member equality <see langword="delegate" />.
+            </summary>
+            <param name="equalityFactory">The member equality <see langword="delegate" />.</param>
+            <returns>
+            Fluent builder for an entity property.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Fluent.MemberMappingBuilder`2.Formatter(System.Func{`1,System.String})">
+            <summary>
+            Sets the member value string formatter <see langword="delegate" />.
+            </summary>
+            <param name="formatterFactory">The member value string formatter factory.</param>
+            <returns>
+            Fluent builder for an entity property.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Fluent.MemberMappingBuilder`2.Display(System.String)">
+            <summary>
+            sets the member display name.
+            </summary>
+            <param name="value">The display name.</param>
+            <returns>
+            Fluent builder for an entity property.
+            </returns>
+        </member>
+        <member name="T:EntityChange.HtmlFormatter">
+            <summary>
+            Format changes in HTML format.
+            </summary>
+        </member>
+        <member name="P:EntityChange.HtmlFormatter.HeaderTemplate">
+            <summary>
+            Gets or sets the header template.
+            </summary>
+            <value>
+            The header template.
+            </value>
+        </member>
+        <member name="P:EntityChange.HtmlFormatter.FooterTemplate">
+            <summary>
+            Gets or sets the footer template.
+            </summary>
+            <value>
+            The footer template.
+            </value>
+        </member>
+        <member name="P:EntityChange.HtmlFormatter.OperationAddTemplate">
+            <summary>
+            Gets or sets the operation add template.
+            </summary>
+            <value>
+            The operation add template.
+            </value>
+        </member>
+        <member name="P:EntityChange.HtmlFormatter.OperationRemoveTemplate">
+            <summary>
+            Gets or sets the operation remove template.
+            </summary>
+            <value>
+            The operation remove template.
+            </value>
+        </member>
+        <member name="P:EntityChange.HtmlFormatter.OperationReplaceTemplate">
+            <summary>
+            Gets or sets the operation replace template.
+            </summary>
+            <value>
+            The operation replace template.
+            </value>
+        </member>
+        <member name="M:EntityChange.HtmlFormatter.Format(System.Collections.ObjectModel.ReadOnlyCollection{EntityChange.ChangeRecord})">
+            <summary>
+            Create a readable change report.
+            </summary>
+            <param name="changes">The changes to format.</param>
+            <returns>
+            A string representing the <paramref name="changes" />.
+            </returns>
+        </member>
+        <member name="T:EntityChange.IChangeFormatter">
+            <summary>
+            An <see langword="interface"/> for formatting changes
+            </summary>
+        </member>
+        <member name="M:EntityChange.IChangeFormatter.Format(System.Collections.ObjectModel.ReadOnlyCollection{EntityChange.ChangeRecord})">
+            <summary>
+            Create a readable change report.
+            </summary>
+            <param name="changes">The changes to format.</param>
+            <returns>A string representing the <paramref name="changes"/>.</returns>
+        </member>
+        <member name="T:EntityChange.IDictionaryWrapper">
+            <summary>
+            Generic dictionary wrapper <see langword="interface"/> to allow comparison by object type
+            </summary>
+        </member>
+        <member name="M:EntityChange.IDictionaryWrapper.GetKeys">
+            <summary>
+            Gets the underling dictionary keys.
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerable"/> of keys</returns>
+        </member>
+        <member name="M:EntityChange.IDictionaryWrapper.GetValue(System.Object)">
+            <summary>
+            Gets the value for the specified <paramref name="key"/>.
+            </summary>
+            <param name="key">The dictionary key.</param>
+            <returns>The value for the specified <paramref name="key"/></returns>
+        </member>
+        <member name="T:EntityChange.IEntityComparer">
+            <summary>
+            A interface to compare two entities generating a change list. 
+            </summary>
+        </member>
+        <member name="M:EntityChange.IEntityComparer.Compare``1(``0,``0)">
+            <summary>
+            Compares the specified <paramref name="original"/> and <paramref name="current"/> entities.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <param name="original">The original entity.</param>
+            <param name="current">The current entity.</param>
+            <returns>A list of changes.</returns>
+        </member>
+        <member name="T:EntityChange.IEntityProfile">
+            <summary>
+            An <see langword="interface"/> for entity comparision profiles.
+            </summary>
+        </member>
+        <member name="P:EntityChange.IEntityProfile.EntityType">
+            <summary>
+            Gets the type of the entity.
+            </summary>
+            <value>
+            The type of the entity.
+            </value>
+        </member>
+        <member name="M:EntityChange.IEntityProfile.Register(EntityChange.EntityMapping)">
+            <summary>
+            Registers the specified class mapping.
+            </summary>
+            <param name="entityMapping">The class mapping.</param>
+        </member>
+        <member name="T:EntityChange.IMemberOptions">
+            <summary>
+            An <see langword="interface"/> for member options
+            </summary>
+        </member>
+        <member name="P:EntityChange.IMemberOptions.DisplayName">
+            <summary>
+            Gets or sets the display name.
+            </summary>
+            <value>
+            The display name.
+            </value>
+        </member>
+        <member name="P:EntityChange.IMemberOptions.Equality">
+            <summary>
+            Gets or sets the equality <see langword="delegate"/>.
+            </summary>
+            <value>
+            The equality <see langword="delegate"/>.
+            </value>
+        </member>
+        <member name="P:EntityChange.IMemberOptions.Formatter">
+            <summary>
+            Gets or sets the string formatter <see langword="delegate" />.
+            </summary>
+            <value>
+            The string formatter <see langword="delegate" />.
+            </value>
+        </member>
+        <member name="P:EntityChange.IMemberOptions.CollectionComparison">
+            <summary>
+            Gets or sets the collection comparison.
+            </summary>
+            <value>
+            The collection comparison.
+            </value>
+        </member>
+        <member name="T:EntityChange.KeyEqualityComparer`2">
+            <summary>
+            Defines methods to support the comparison of objects key for equality.
+            </summary>
+            <typeparam name="TComparer">The type of the comparer.</typeparam>
+            <typeparam name="TKey">The type of the key.</typeparam>
+            <seealso cref="T:System.Collections.Generic.IEqualityComparer`1" />
+        </member>
+        <member name="M:EntityChange.KeyEqualityComparer`2.#ctor(System.Func{`0,`1},System.Collections.Generic.IEqualityComparer{`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.KeyEqualityComparer`2"/> class.
+            </summary>
+            <param name="keySelector">The key selector.</param>
+            <param name="comparer">The comparer.</param>
+            <exception cref="T:System.ArgumentNullException">keySelector</exception>
+        </member>
+        <member name="M:EntityChange.KeyEqualityComparer`2.Equals(`0,`0)">
+            <summary>
+            Determines whether the specified objects are equal.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>
+              <see langword="true" /> if the specified objects are equal; otherwise, <see langword="false" />.
+            </returns>
+        </member>
+        <member name="M:EntityChange.KeyEqualityComparer`2.GetHashCode(`0)">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <param name="obj">The object.</param>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+        </member>
+        <member name="M:EntityChange.KeyEqualityComparer`2.Create(System.Func{`0,`1})">
+            <summary>
+            Creates an <see cref="T:EntityChange.KeyEqualityComparer`2"/> from the specified key selector expression.
+            </summary>
+            <param name="keySelector">The key selector.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EntityChange.KeyEqualityComparer`2.Create(System.Func{`0,`1},System.Collections.Generic.IEqualityComparer{`1})">
+            <summary>
+            Creates an <see cref="T:EntityChange.KeyEqualityComparer`2"/> from the specified key selector expression.
+            </summary>
+            <param name="keySelector">The key selector.</param>
+            <param name="comparer">The key comparer.</param>
+            <returns></returns>
+        </member>
+        <member name="T:EntityChange.MarkdownFormatter">
+            <summary>
+            Format changes in Markdown format.
+            </summary>
+        </member>
+        <member name="P:EntityChange.MarkdownFormatter.HeaderTemplate">
+            <summary>
+            Gets or sets the header template.
+            </summary>
+            <value>
+            The header template.
+            </value>
+        </member>
+        <member name="P:EntityChange.MarkdownFormatter.FooterTemplate">
+            <summary>
+            Gets or sets the footer template.
+            </summary>
+            <value>
+            The footer template.
+            </value>
+        </member>
+        <member name="P:EntityChange.MarkdownFormatter.OperationAddTemplate">
+            <summary>
+            Gets or sets the operation add template.
+            </summary>
+            <value>
+            The operation add template.
+            </value>
+        </member>
+        <member name="P:EntityChange.MarkdownFormatter.OperationRemoveTemplate">
+            <summary>
+            Gets or sets the operation remove template.
+            </summary>
+            <value>
+            The operation remove template.
+            </value>
+        </member>
+        <member name="P:EntityChange.MarkdownFormatter.OperationReplaceTemplate">
+            <summary>
+            Gets or sets the operation replace template.
+            </summary>
+            <value>
+            The operation replace template.
+            </value>
+        </member>
+        <member name="M:EntityChange.MarkdownFormatter.Format(System.Collections.ObjectModel.ReadOnlyCollection{EntityChange.ChangeRecord})">
+            <summary>
+            Create a readable change report.
+            </summary>
+            <param name="changes">The changes to format.</param>
+            <returns>
+            A string representing the <paramref name="changes" />.
+            </returns>
+        </member>
+        <member name="T:EntityChange.MemberMapping">
+            <summary>
+            Mapping information for a class member.
+            </summary>
+        </member>
+        <member name="P:EntityChange.MemberMapping.Ignored">
+            <summary>
+            Gets or sets a value indicating whether the member is ignored.
+            </summary>
+            <value>
+              <c>true</c> if ignored; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:EntityChange.MemberMapping.MemberAccessor">
+            <summary>
+            Gets or sets the member accessor.
+            </summary>
+            <value>
+            The member accessor.
+            </value>
+        </member>
+        <member name="P:EntityChange.MemberMapping.DisplayName">
+            <summary>
+            Gets or sets the display name.
+            </summary>
+            <value>
+            The display name.
+            </value>
+        </member>
+        <member name="P:EntityChange.MemberMapping.Equality">
+            <summary>
+            Gets or sets the equality <see langword="delegate" />.
+            </summary>
+            <value>
+            The equality <see langword="delegate" />.
+            </value>
+        </member>
+        <member name="P:EntityChange.MemberMapping.Formatter">
+            <summary>
+            Gets or sets the member value string formatter <see langword="delegate" />.
+            </summary>
+            <value>
+            The string formatter <see langword="delegate" />.
+            </value>
+        </member>
+        <member name="P:EntityChange.MemberMapping.CollectionComparison">
+            <summary>
+            Gets or sets the collection comparison.
+            </summary>
+            <value>
+            The collection comparison.
+            </value>
+        </member>
+        <member name="T:EntityChange.NameFormatter">
+            <summary>
+            Named string formatter.
+            </summary>
+        </member>
+        <member name="M:EntityChange.NameFormatter.Format(System.String,System.Object)">
+            <summary>
+            Replaces each named format item in a specified string with the text equivalent of a corresponding object's property value.
+            </summary>
+            <param name="format">A composite format string.</param>
+            <param name="source">The object to format.</param>
+            <returns>A copy of format in which any named format items are replaced by the string representation.</returns>
+            <example>
+            <code>
+            var o = new { First = "John", Last = "Doe" };
+            string result = NameFormatter.Format("Full Name: {First} {Last}", o);
+            </code>
+            </example>
+        </member>
+        <member name="T:EntityChange.Reflection.FieldAccessor">
+            <summary>
+            An accessor class for <see cref="T:System.Reflection.FieldInfo"/>.
+            </summary>
+        </member>
+        <member name="M:EntityChange.Reflection.FieldAccessor.#ctor(System.Reflection.FieldInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.Reflection.FieldAccessor"/> class.
+            </summary>
+            <param name="fieldInfo">The <see cref="T:System.Reflection.FieldInfo"/> instance to use for this accessor.</param>
+        </member>
+        <member name="P:EntityChange.Reflection.FieldAccessor.MemberType">
+            <summary>
+            Gets the type of the member.
+            </summary>
+            <value>The type of the member.</value>
+        </member>
+        <member name="P:EntityChange.Reflection.FieldAccessor.MemberInfo">
+            <summary>
+            Gets the member info.
+            </summary>
+            <value>The member info.</value>
+        </member>
+        <member name="P:EntityChange.Reflection.FieldAccessor.Name">
+            <summary>
+            Gets the name of the member.
+            </summary>
+            <value>The name of the member.</value>
+        </member>
+        <member name="P:EntityChange.Reflection.FieldAccessor.HasGetter">
+            <summary>
+            Gets a value indicating whether this member has getter.
+            </summary>
+            <value><c>true</c> if this member has getter; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:EntityChange.Reflection.FieldAccessor.HasSetter">
+            <summary>
+            Gets a value indicating whether this member has setter.
+            </summary>
+            <value><c>true</c> if this member has setter; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:EntityChange.Reflection.FieldAccessor.GetValue(System.Object)">
+            <summary>
+            Returns the value of the member.
+            </summary>
+            <param name="instance">The object whose member value will be returned.</param>
+            <returns>
+            The member value for the instance parameter.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.FieldAccessor.SetValue(System.Object,System.Object)">
+            <summary>
+            Sets the value of the member.
+            </summary>
+            <param name="instance">The object whose member value will be set.</param>
+            <param name="value">The new value for this member.</param>
+        </member>
+        <member name="T:EntityChange.Reflection.IMemberAccessor">
+            <summary>
+            An <see langword="interface"/> for late binding member accessors.
+            </summary>
+        </member>
+        <member name="M:EntityChange.Reflection.IMemberAccessor.GetValue(System.Object)">
+            <summary>
+            Returns the value of the member.
+            </summary>
+            <param name="instance">The instance whose member value will be returned.</param>
+            <returns>The member value for the instance parameter.</returns>
+        </member>
+        <member name="M:EntityChange.Reflection.IMemberAccessor.SetValue(System.Object,System.Object)">
+            <summary>
+            Sets the <paramref name="value"/> of the member.
+            </summary>
+            <param name="instance">The instance whose member value will be set.</param>
+            <param name="value">The new value for this member.</param>
+        </member>
+        <member name="T:EntityChange.Reflection.IMemberInfo">
+            <summary>
+            An interface for member information
+            </summary>
+        </member>
+        <member name="P:EntityChange.Reflection.IMemberInfo.MemberType">
+            <summary>
+            Gets the type of the member.
+            </summary>
+            <value>The type of the member.</value>
+        </member>
+        <member name="P:EntityChange.Reflection.IMemberInfo.MemberInfo">
+            <summary>
+            Gets the member info.
+            </summary>
+            <value>The member info.</value>
+        </member>
+        <member name="P:EntityChange.Reflection.IMemberInfo.Name">
+            <summary>
+            Gets the name of the member.
+            </summary>
+            <value>The name of the member.</value>
+        </member>
+        <member name="P:EntityChange.Reflection.IMemberInfo.HasGetter">
+            <summary>
+            Gets a value indicating whether this member has getter.
+            </summary>
+            <value>
+            	<c>true</c> if this member has getter; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:EntityChange.Reflection.IMemberInfo.HasSetter">
+            <summary>
+            Gets a value indicating whether this member has setter.
+            </summary>
+            <value>
+            	<c>true</c> if this member has setter; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:EntityChange.Reflection.IMethodAccessor">
+            <summary>
+            An interface for method accessor
+            </summary>
+        </member>
+        <member name="P:EntityChange.Reflection.IMethodAccessor.MethodInfo">
+            <summary>
+            Gets the method info.
+            </summary>
+        </member>
+        <member name="P:EntityChange.Reflection.IMethodAccessor.Name">
+            <summary>
+            Gets the name of the member.
+            </summary>
+            <value>The name of the member.</value>
+        </member>
+        <member name="M:EntityChange.Reflection.IMethodAccessor.Invoke(System.Object,System.Object[])">
+            <summary>
+            Invokes the method on the specified <paramref name="instance"/>.
+            </summary>
+            <param name="instance">The object on which to invoke the method. If a method is static, this argument is ignored.</param>
+            <param name="arguments">An argument list for the invoked method.</param>
+            <returns>An object containing the return value of the invoked method.</returns>
+        </member>
+        <member name="T:EntityChange.Reflection.LateBinder">
+            <summary>
+            A class for late bound operations on a <see cref="T:System.Type"/>.
+            </summary>
+        </member>
+        <member name="F:EntityChange.Reflection.LateBinder.DefaultPublicFlags">
+            <summary>
+            The default public flags
+            </summary>
+        </member>
+        <member name="F:EntityChange.Reflection.LateBinder.DefaultNonPublicFlags">
+            <summary>
+            The default non public flags
+            </summary>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.FindMethod(System.Type,System.String,System.Object[])">
+            <summary>
+            Searches for the specified method with the specified name.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to search for the method in.</param>
+            <param name="name">The name of the method to find.</param>
+            <param name="arguments">The arguments.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMethodAccessor"/> instance for the method if found; otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.FindMethod(System.Type,System.String,System.Reflection.BindingFlags,System.Object[])">
+            <summary>
+            Searches for the specified method, using the specified binding constraints.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to search for the method in.</param>
+            <param name="name">The name of the method to find.</param>
+            <param name="flags">A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search is conducted.</param>
+            <param name="arguments">The arguments.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMethodAccessor"/> instance for the method if found; otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.FindProperty``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Searches for the property using a property expression.
+            </summary>
+            <typeparam name="T">The object type containing the property specified in the expression.</typeparam>
+            <param name="propertyExpression">The property expression (e.g. p => p.PropertyName)</param>
+            <returns>An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the property if found; otherwise <c>null</c>.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="propertyExpression"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when the expression is:<br/>
+                Not a <see cref="T:System.Linq.Expressions.MemberExpression"/><br/>
+                The <see cref="T:System.Linq.Expressions.MemberExpression"/> does not represent a property.<br/>
+                Or, the property is static.
+            </exception>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.FindProperty(System.Type,System.String)">
+            <summary>
+            Searches for the public property with the specified name.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to search for the property in.</param>
+            <param name="name">The name of the property to find.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the property if found; otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.FindProperty(System.Type,System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Searches for the specified property, using the specified binding constraints.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to search for the property in.</param>
+            <param name="name">The name of the property to find.</param>
+            <param name="flags">A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search is conducted.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the property if found; otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.FindField(System.Type,System.String)">
+            <summary>
+            Searches for the field with the specified name.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to search for the field in.</param>
+            <param name="name">The name of the field to find.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the field if found; otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.FindField(System.Type,System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Searches for the field, using the specified binding constraints.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to search for the field in.</param>
+            <param name="name">The name of the field to find.</param>
+            <param name="flags">A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search is conducted.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the field if found; otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.Find(System.Type,System.String)">
+            <summary>
+            Searches for the property or field with the specified name.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to search for the property or field in.</param>
+            <param name="name">The name of the property or field to find.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the property or field if found; otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.Find(System.Type,System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Searches for the property or field, using the specified binding constraints.
+            </summary>
+            <param name="type">The <see cref="T:System.Type"/> to search for the property or field in.</param>
+            <param name="name">The name of the property or field to find.</param>
+            <param name="flags">A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search is conducted.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the property or field if found; otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.SetProperty(System.Object,System.String,System.Object)">
+            <summary>
+            Sets the property value with the specified name.
+            </summary>
+            <param name="target">The object whose property value will be set.</param>
+            <param name="name">The name of the property to set.</param>
+            <param name="value">The new value to be set.</param>
+            <remarks>This method supports nested property names. An exmample name would be 'Person.Address.ZipCode'.</remarks>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.SetProperty(System.Object,System.String,System.Object,System.Reflection.BindingFlags)">
+            <summary>
+            Sets the property value with the specified name.
+            </summary>
+            <param name="target">The object whose property value will be set.</param>
+            <param name="name">The name of the property to set.</param>
+            <param name="value">The new value to be set.</param>
+            <remarks>This method supports nested property names. An exmample name would be 'Person.Address.ZipCode'.</remarks>
+            <param name="flags">A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search is conducted.</param>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.SetField(System.Object,System.String,System.Object)">
+            <summary>
+            Sets the field value with the specified name.
+            </summary>
+            <param name="target">The object whose field value will be set.</param>
+            <param name="name">The name of the field to set.</param>
+            <param name="value">The new value to be set.</param>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.SetField(System.Object,System.String,System.Object,System.Reflection.BindingFlags)">
+            <summary>
+            Sets the field value with the specified name.
+            </summary>
+            <param name="target">The object whose field value will be set.</param>
+            <param name="name">The name of the field to set.</param>
+            <param name="value">The new value to be set.</param>
+            <param name="flags">A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search is conducted.</param>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.Set(System.Object,System.String,System.Object)">
+            <summary>
+            Sets the property or field value with the specified name.
+            </summary>
+            <param name="target">The object whose property or field value will be set.</param>
+            <param name="name">The name of the property or field to set.</param>
+            <param name="value">The new value to be set.</param>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.Set(System.Object,System.String,System.Object,System.Reflection.BindingFlags)">
+            <summary>
+            Sets the property or field value with the specified name.
+            </summary>
+            <param name="target">The object whose property or field value will be set.</param>
+            <param name="name">The name of the property or field to set.</param>
+            <param name="value">The new value to be set.</param>
+            <param name="flags">A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search is conducted.</param>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.GetProperty(System.Object,System.String)">
+            <summary>
+            Returns the value of the property with the specified name.
+            </summary>
+            <param name="target">The object whose property value will be returned.</param>
+            <param name="name">The name of the property to read.</param>
+            <returns>The value of the property.</returns>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.GetProperty(System.Object,System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Returns the value of the property with the specified name.
+            </summary>
+            <param name="target">The object whose property value will be returned.</param>
+            <param name="name">The name of the property to read.</param>
+            <param name="flags">A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search is conducted.</param>
+            <returns>The value of the property.</returns>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.GetField(System.Object,System.String)">
+            <summary>
+            Returns the value of the field with the specified name.
+            </summary>
+            <param name="target">The object whose field value will be returned.</param>
+            <param name="name">The name of the field to read.</param>
+            <returns>The value of the field.</returns>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.GetField(System.Object,System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Returns the value of the field with the specified name.
+            </summary>
+            <param name="target">The object whose field value will be returned.</param>
+            <param name="name">The name of the field to read.</param>
+            <param name="flags">A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search is conducted.</param>
+            <returns>The value of the field.</returns>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.Get(System.Object,System.String)">
+            <summary>
+            Returns the value of the property or field with the specified name.
+            </summary>
+            <param name="target">The object whose property or field value will be returned.</param>
+            <param name="name">The name of the property or field to read.</param>
+            <returns>The value of the property or field.</returns>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.Get(System.Object,System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Returns the value of the property or field with the specified name.
+            </summary>
+            <param name="target">The object whose property or field value will be returned.</param>
+            <param name="name">The name of the property or field to read.</param>
+            <param name="flags">A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search is conducted.</param>
+            <returns>The value of the property or field.</returns>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.CreateInstance(System.Type)">
+            <summary>
+            Creates an instance of the specified type.
+            </summary>
+            <param name="type">The type to create.</param>
+            <returns>A new instance of the specified type.</returns>
+        </member>
+        <member name="M:EntityChange.Reflection.LateBinder.InvokeMethod(System.Object,System.String,System.Object[])">
+            <summary>
+            Invokes the method with the spcified name and arguments.
+            </summary>
+            <param name="target">The target instance to call the method on.</param>
+            <param name="name">The name of the method.</param>
+            <param name="arguments">The method argument values.</param>
+            <returns>The returned results from the method call.</returns>
+        </member>
+        <member name="T:EntityChange.Reflection.MemberAccessor">
+            <summary>
+            A <see langword="base"/> class for member accessors.
+            </summary>
+        </member>
+        <member name="P:EntityChange.Reflection.MemberAccessor.MemberType">
+            <summary>
+            Gets the <see cref="T:System.Type"/> of the member.
+            </summary>
+            <value>The <see cref="T:System.Type"/> of the member.</value>
+        </member>
+        <member name="P:EntityChange.Reflection.MemberAccessor.MemberInfo">
+            <summary>
+            Gets the <see cref="P:EntityChange.Reflection.MemberAccessor.MemberInfo"/> for the accessor.
+            </summary>
+            <value>The member info.</value>
+        </member>
+        <member name="P:EntityChange.Reflection.MemberAccessor.Name">
+            <summary>
+            Gets the name of the member.
+            </summary>
+            <value>The name of the member.</value>
+        </member>
+        <member name="P:EntityChange.Reflection.MemberAccessor.HasGetter">
+            <summary>
+            Gets a value indicating whether this member has getter.
+            </summary>
+            <value><c>true</c> if this member has getter; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:EntityChange.Reflection.MemberAccessor.HasSetter">
+            <summary>
+            Gets a value indicating whether this member has setter.
+            </summary>
+            <value><c>true</c> if this member has setter; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:EntityChange.Reflection.MemberAccessor.GetValue(System.Object)">
+            <summary>
+            Returns the value of the member.
+            </summary>
+            <param name="instance">The object whose member value will be returned.</param>
+            <returns>
+            The member value for the instance parameter.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.MemberAccessor.SetValue(System.Object,System.Object)">
+            <summary>
+            Sets the value of the member.
+            </summary>
+            <param name="instance">The object whose member value will be set.</param>
+            <param name="value">The new value for this member.</param>
+        </member>
+        <member name="M:EntityChange.Reflection.MemberAccessor.Equals(EntityChange.Reflection.IMemberAccessor)">
+            <summary>
+            Determines whether the specified <see cref="T:EntityChange.Reflection.IMemberAccessor"/> is equal to this instance.
+            </summary>
+            <param name="other">The <see cref="T:EntityChange.Reflection.IMemberAccessor"/> to compare with this instance.</param>
+            <returns>
+            	<c>true</c> if the specified <see cref="T:EntityChange.Reflection.IMemberAccessor"/> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.MemberAccessor.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object"/> to compare with this instance.</param>
+            <returns>
+            	<c>true</c> if the specified <see cref="T:System.Object"/> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.MemberAccessor.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+        </member>
+        <member name="T:EntityChange.Reflection.MethodAccessor">
+            <summary>
+            An accessor class for <see cref="P:EntityChange.Reflection.MethodAccessor.MethodInfo"/>.
+            </summary>
+        </member>
+        <member name="M:EntityChange.Reflection.MethodAccessor.#ctor(System.Reflection.MethodInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.Reflection.MethodAccessor"/> class.
+            </summary>
+            <param name="methodInfo">The method info.</param>
+        </member>
+        <member name="P:EntityChange.Reflection.MethodAccessor.MethodInfo">
+            <summary>
+            Gets the method info.
+            </summary>
+        </member>
+        <member name="P:EntityChange.Reflection.MethodAccessor.Name">
+            <summary>
+            Gets the name of the member.
+            </summary>
+            <value>
+            The name of the member.
+            </value>
+        </member>
+        <member name="M:EntityChange.Reflection.MethodAccessor.Invoke(System.Object,System.Object[])">
+            <summary>
+            Invokes the method on the specified <paramref name="instance"/>.
+            </summary>
+            <param name="instance">The object on which to invoke the method. If a method is static, this argument is ignored.</param>
+            <param name="arguments">An argument list for the invoked method.</param>
+            <returns>
+            An object containing the return value of the invoked method.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.MethodAccessor.GetKey(System.String,System.Collections.Generic.IEnumerable{System.Type})">
+            <summary>
+            Gets the method key using a hash code from the name and paremeter types.
+            </summary>
+            <param name="name">The name of the method.</param>
+            <param name="parameterTypes">The method parameter types.</param>
+            <returns>The method key</returns>
+        </member>
+        <member name="T:EntityChange.Reflection.PropertyAccessor">
+            <summary>
+            An accessor class for <see cref="T:System.Reflection.PropertyInfo"/>.
+            </summary>
+        </member>
+        <member name="M:EntityChange.Reflection.PropertyAccessor.#ctor(System.Reflection.PropertyInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.Reflection.PropertyAccessor"/> class.
+            </summary>
+            <param name="propertyInfo">The <see cref="T:System.Reflection.PropertyInfo"/> instance to use for this accessor.</param>
+        </member>
+        <member name="P:EntityChange.Reflection.PropertyAccessor.MemberType">
+            <summary>
+            Gets the type of the member.
+            </summary>
+            <value>The type of the member.</value>
+        </member>
+        <member name="P:EntityChange.Reflection.PropertyAccessor.MemberInfo">
+            <summary>
+            Gets the member info.
+            </summary>
+            <value>The member info.</value>
+        </member>
+        <member name="P:EntityChange.Reflection.PropertyAccessor.Name">
+            <summary>
+            Gets the name of the member.
+            </summary>
+            <value>The name of the member.</value>
+        </member>
+        <member name="P:EntityChange.Reflection.PropertyAccessor.HasGetter">
+            <summary>
+            Gets a value indicating whether this member has getter.
+            </summary>
+            <value><c>true</c> if this member has getter; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:EntityChange.Reflection.PropertyAccessor.HasSetter">
+            <summary>
+            Gets a value indicating whether this member has setter.
+            </summary>
+            <value><c>true</c> if this member has setter; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:EntityChange.Reflection.PropertyAccessor.GetValue(System.Object)">
+            <summary>
+            Returns the value of the member.
+            </summary>
+            <param name="instance">The object whose member value will be returned.</param>
+            <returns>
+            The member value for the instance parameter.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.PropertyAccessor.SetValue(System.Object,System.Object)">
+            <summary>
+            Sets the value of the member.
+            </summary>
+            <param name="instance">The object whose member value will be set.</param>
+            <param name="value">The new value for this member.</param>
+        </member>
+        <member name="T:EntityChange.Reflection.ReflectionHelper">
+            <summary>
+            Reflection helper methods
+            </summary>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.ExtractPropertyName``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Extracts the property name from a property expression.
+            </summary>
+            <typeparam name="TValue">The of the property value.</typeparam>
+            <param name="propertyExpression">The property expression (e.g. p => p.PropertyName)</param>
+            <returns>The name of the property.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="propertyExpression"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when the expression is:<br/>
+                Not a <see cref="T:System.Linq.Expressions.MemberExpression"/><br/>
+                The <see cref="T:System.Linq.Expressions.MemberExpression"/> does not represent a property.<br/>
+                Or, the property is static.
+            </exception>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.ExtractPropertyName``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Extracts the property name from a property expression.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TValue">The type of the property value.</typeparam>
+            <param name="propertyExpression">The property expression (e.g. p =&gt; p.PropertyName)</param>
+            <returns>
+            The name of the property.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="propertyExpression"/> is null.</exception>
+              
+            <exception cref="T:System.ArgumentException">Thrown when the expression is:<br/>
+            Not a <see cref="T:System.Linq.Expressions.MemberExpression"/><br/>
+            The <see cref="T:System.Linq.Expressions.MemberExpression"/> does not represent a property.<br/>
+            Or, the property is static.
+              </exception>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.ExtractPropertyName(System.Linq.Expressions.MemberExpression)">
+            <summary>
+            Extracts the property name from a property expression.
+            </summary>
+            <param name="memberExpression">The member expression</param>
+            <returns>
+            The name of the property.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="memberExpression"/> is null.</exception>
+              
+            <exception cref="T:System.ArgumentException">Thrown when the expression is:<br/>
+            Not a <see cref="T:System.Linq.Expressions.MemberExpression"/><br/>
+            The <see cref="T:System.Linq.Expressions.MemberExpression"/> does not represent a property.<br/>
+            Or, the property is static.
+              </exception>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.ExtractColumnName``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Extracts the property name from a property expression.
+            </summary>
+            <typeparam name="TValue">The of the property value.</typeparam>
+            <param name="propertyExpression">The property expression (e.g. p => p.PropertyName)</param>
+            <returns>The name of the property.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="propertyExpression"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when the expression is:<br/>
+                Not a <see cref="T:System.Linq.Expressions.MemberExpression"/><br/>
+                The <see cref="T:System.Linq.Expressions.MemberExpression"/> does not represent a property.<br/>
+                Or, the property is static.
+            </exception>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.ExtractColumnName``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Extracts the property name from a property expression.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TValue">The type of the property value.</typeparam>
+            <param name="propertyExpression">The property expression (e.g. p =&gt; p.PropertyName)</param>
+            <returns>
+            The name of the property.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="propertyExpression"/> is null.</exception>
+              
+            <exception cref="T:System.ArgumentException">Thrown when the expression is:<br/>
+            Not a <see cref="T:System.Linq.Expressions.MemberExpression"/><br/>
+            The <see cref="T:System.Linq.Expressions.MemberExpression"/> does not represent a property.<br/>
+            Or, the property is static.
+              </exception>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.ExtractColumnName(System.Linq.Expressions.MemberExpression)">
+            <summary>
+            Extracts the property name from a property expression.
+            </summary>
+            <param name="memberExpression">The member expression</param>
+            <returns>
+            The name of the property.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="memberExpression"/> is null.</exception>
+              
+            <exception cref="T:System.ArgumentException">Thrown when the expression is:<br/>
+            Not a <see cref="T:System.Linq.Expressions.MemberExpression"/><br/>
+            The <see cref="T:System.Linq.Expressions.MemberExpression"/> does not represent a property.<br/>
+            Or, the property is static.
+              </exception>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.ExtractPropertyInfo``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Extracts the <see cref="T:System.Reflection.PropertyInfo"/> from the specified property expression.
+            </summary>
+            <typeparam name="TValue">The type of the value.</typeparam>
+            <param name="propertyExpression">The property expression.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.ExtractPropertyInfo``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Extracts the <see cref="T:System.Reflection.PropertyInfo"/> from the specified property expression.
+            </summary>
+            <typeparam name="TSource">The type of the source.</typeparam>
+            <typeparam name="TValue">The type of the value.</typeparam>
+            <param name="propertyExpression">The property expression.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.ExtractPropertyInfo(System.Linq.Expressions.MemberExpression)">
+            <summary>
+            Extracts the <see cref="T:System.Reflection.PropertyInfo"/> from the specified member expression.
+            </summary>
+            <param name="memberExpression">The member expression.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.GetUnderlyingType(System.Type)">
+            <summary>
+            Gets the underlying type dealing with <see cref="T:System.Nullable"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>Returns a type dealing with <see cref="T:System.Nullable"/>.</returns>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.IsCollection(System.Type)">
+            <summary>
+            Determines whether the specified <paramref name="type"/> is a collection.
+            </summary>
+            <param name="type">The type to check.</param>
+            <returns>
+              <c>true</c> if the specified <paramref name="type"/> is a collection; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.IsCollection(System.Type,System.Type@)">
+            <summary>
+            Determines whether the specified <paramref name="type"/> is a collection.
+            </summary>
+            <param name="type">The type to check.</param>
+            <param name="elementType">The Type of the generic element.</param>
+            <returns>
+              <c>true</c> if the specified <paramref name="type"/> is a collection; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.IsDictionary(System.Type)">
+            <summary>
+            Determines whether the specified <paramref name="type"/> is a dictionary.
+            </summary>
+            <param name="type">The type to check.</param>
+            <returns>
+              <c>true</c> if the specified <paramref name="type"/> is a dictionary; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.IsDictionary(System.Type,System.Type@,System.Type@)">
+            <summary>
+            Determines whether the specified <paramref name="type"/> is a dictionary.
+            </summary>
+            <param name="type">The type to check.</param>
+            <param name="keyType">Type of the generic key.</param>
+            <param name="elementType">The Type of the generic element.</param>
+            <returns>
+              <c>true</c> if the specified <paramref name="type"/> is a dictionary; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.CoerceValue(System.Type,System.Type,System.Object)">
+            <summary>
+            Attempts to coerce a value of one type into
+            a value of a different type.
+            </summary>
+            <param name="desiredType">
+            Type to which the value should be coerced.MO
+            </param>
+            <param name="valueType">
+            Original type of the value.
+            </param>
+            <param name="value">
+            The value to coerce.
+            </param>
+            <remarks>
+            <para>
+            If the desired type is a primitive type or Decimal, 
+            empty string and null values will result in a 0 
+            or equivalent.
+            </para>
+            <para>
+            If the desired type is a <see cref="T:System.Nullable"/> type, empty string
+            and null values will result in a null result.
+            </para>
+            <para>
+            If the desired type is an <c>enum</c> the value's ToString()
+            result is parsed to convert into the <c>enum</c> value.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:EntityChange.Reflection.ReflectionHelper.IsOverriding(System.Reflection.MethodInfo)">
+            <summary>
+            Determines whether the specified <paramref name="method"/> overrides a base method.
+            </summary>
+            <param name="method">The method information.</param>
+            <returns>
+              <c>true</c> if the specified <paramref name="method"/> overrides a base method; otherwise, <c>false</c>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">methodInfo</exception>
+        </member>
+        <member name="T:EntityChange.Reflection.TypeAccessor">
+            <summary>
+            A class for accessing type reflection information.
+            </summary>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.#ctor(System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EntityChange.Reflection.TypeAccessor"/> class.
+            </summary>
+            <param name="type">The <see cref="P:EntityChange.Reflection.TypeAccessor.Type"/> this accessor is for.</param>
+        </member>
+        <member name="P:EntityChange.Reflection.TypeAccessor.Type">
+            <summary>
+            Gets the <see cref="P:EntityChange.Reflection.TypeAccessor.Type"/> this accessor is for.
+            </summary>
+            <value>The <see cref="P:EntityChange.Reflection.TypeAccessor.Type"/> this accessor is for.</value>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.Create">
+            <summary>
+            Creates a new instance of accessors type.
+            </summary>
+            <returns>A new instance of accessors type.</returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.FindMethod(System.String)">
+            <summary>
+            Finds the method with the spcified <paramref name="name"/>.
+            </summary>
+            <param name="name">The name of the method.</param>
+            <returns>An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> for the method.</returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.FindMethod(System.String,System.Type[])">
+            <summary>
+            Finds the method with the spcified <paramref name="name" />.
+            </summary>
+            <param name="name">The name of the method.</param>
+            <param name="parameterTypes">The method parameter types.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor" /> for the method.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.FindMethod(System.String,System.Type[],System.Reflection.BindingFlags)">
+            <summary>
+            Finds the method with the spcified <paramref name="name" />.
+            </summary>
+            <param name="name">The name of the method.</param>
+            <param name="parameterTypes">The method parameter types.</param>
+            <param name="flags">The binding flags to search.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor" /> for the method.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.Find(System.String)">
+            <summary>
+            Searches for the public property or field with the specified name.
+            </summary>
+            <param name="name">The name of the property or field to find.</param>
+            <returns>An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the property or field if found; otherwise <c>null</c>.</returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.Find(System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Searches for the specified property or field, using the specified binding constraints.
+            </summary>
+            <param name="name">The name of the property or field to find.</param>
+            <param name="flags">A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search is conducted.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the property or field if found; otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.FindColumn(System.String)">
+            <summary>
+            Searches for the public property with the specified column name.
+            </summary>
+            <param name="name">The name of the property or field to find.</param>
+            <returns>An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the property or field if found; otherwise <c>null</c>.</returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.FindColumn(System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Searches for the specified property the specified column name and binding constraints.
+            </summary>
+            <param name="name">The name of the property to find.</param>
+            <param name="flags">A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search is conducted.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the property if found; otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.FindProperty``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Searches for the property using a property expression.
+            </summary>
+            <typeparam name="T">The object type containing the property specified in the expression.</typeparam>
+            <param name="propertyExpression">The property expression (e.g. p => p.PropertyName)</param>
+            <returns>An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the property if found; otherwise <c>null</c>.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="propertyExpression"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown when the expression is:<br/>
+                Not a <see cref="T:System.Linq.Expressions.MemberExpression"/><br/>
+                The <see cref="T:System.Linq.Expressions.MemberExpression"/> does not represent a property.<br/>
+                Or, the property is static.
+            </exception>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.FindProperty``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Searches for the property using a property expression.
+            </summary>
+            <typeparam name="TSource">The object type containing the property specified in the expression.</typeparam>
+            <typeparam name="TValue">The type of the value.</typeparam>
+            <param name="propertyExpression">The property expression (e.g. p =&gt; p.PropertyName)</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the property if found; otherwise <c>null</c>.
+            </returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if the <paramref name="propertyExpression"/> is null.</exception>
+              
+            <exception cref="T:System.ArgumentException">Thrown when the expression is:<br/>
+            Not a <see cref="T:System.Linq.Expressions.MemberExpression"/><br/>
+            The <see cref="T:System.Linq.Expressions.MemberExpression"/> does not represent a property.<br/>
+            Or, the property is static.
+              </exception>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.FindProperty(System.String)">
+            <summary>
+            Searches for the <see langword="public"/> property with the specified <paramref name="name"/>.
+            </summary>
+            <param name="name">The name of the property to find.</param>
+            <returns>An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the property if found; otherwise <c>null</c>.</returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.FindProperty(System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Searches for the specified property, using the specified binding constraints.
+            </summary>
+            <param name="name">The name of the property to find.</param>
+            <param name="flags">A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search is conducted.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the property if found; otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.GetAccessor(System.Reflection.PropertyInfo)">
+            <summary>
+            Gets the <see cref="T:EntityChange.Reflection.IMemberAccessor"/> for the specified <see cref="T:System.Reflection.PropertyInfo"/>.
+            </summary>
+            <param name="propertyInfo">The <see cref="T:System.Reflection.PropertyInfo"/> to get the <see cref="T:EntityChange.Reflection.IMemberAccessor"/> for.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the property.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.GetProperties">
+            <summary>
+            Gets the property member accessors for the Type.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instances for the Type.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.GetProperties(System.Reflection.BindingFlags)">
+            <summary>
+            Gets the property member accessors for the Type using the specified flags.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instances for the Type.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.FindField(System.String)">
+            <summary>
+            Searches for the specified field with the specified name.
+            </summary>
+            <param name="name">The name of the field to find.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the field if found; otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.FindField(System.String,System.Reflection.BindingFlags)">
+            <summary>
+            Searches for the specified field, using the specified binding constraints.
+            </summary>
+            <param name="name">The name of the field to find.</param>
+            <param name="flags">A bitmask comprised of one or more <see cref="T:System.Reflection.BindingFlags"/> that specify how the search is conducted.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the field if found; otherwise <c>null</c>.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.GetAccessor(System.Reflection.FieldInfo)">
+            <summary>
+            Gets the <see cref="T:EntityChange.Reflection.IMemberAccessor"/> for the specified <see cref="T:System.Reflection.FieldInfo"/>.
+            </summary>
+            <param name="fieldInfo">The <see cref="T:System.Reflection.FieldInfo"/> to get the <see cref="T:EntityChange.Reflection.IMemberAccessor"/> for.</param>
+            <returns>
+            An <see cref="T:EntityChange.Reflection.IMemberAccessor"/> instance for the property.
+            </returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.GetAccessor``1">
+            <summary>
+            Gets the <see cref="T:EntityChange.Reflection.TypeAccessor"/> for the specified Type.
+            </summary>
+            <typeparam name="T">The Type to get the accessor for.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:EntityChange.Reflection.TypeAccessor.GetAccessor(System.Type)">
+            <summary>
+            Gets the <see cref="T:EntityChange.Reflection.TypeAccessor"/> for the specified Type.
+            </summary>
+            <param name="type">The Type to get the accessor for.</param>
+            <returns></returns>
+        </member>
+        <member name="T:EntityChange.StringEquality">
+            <summary>
+            A <see langword="static"/> class for string equality comparison
+            </summary>
+        </member>
+        <member name="M:EntityChange.StringEquality.CurrentCulture(System.Object,System.Object)">
+            <summary>
+            Determines whether the specified <paramref name="original"/> and <paramref name="current"/> 
+            strings have the same value using <see cref="F:System.StringComparison.CurrentCulture"/> option.
+            </summary>
+            <param name="original">The original string to compare.</param>
+            <param name="current">The current string to compare.</param>
+            <returns><c>true</c> if <paramref name="original"/> is equal <paramref name="current"/>; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:EntityChange.StringEquality.CurrentCultureIgnoreCase(System.Object,System.Object)">
+            <summary>
+            Determines whether the specified <paramref name="original"/> and <paramref name="current"/> 
+            strings have the same value using <see cref="F:System.StringComparison.CurrentCultureIgnoreCase"/> option.
+            </summary>
+            <param name="original">The original string to compare.</param>
+            <param name="current">The current string to compare.</param>
+            <returns><c>true</c> if <paramref name="original"/> is equal <paramref name="current"/>; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:EntityChange.StringEquality.InvariantCulture(System.Object,System.Object)">
+            <summary>
+            Determines whether the specified <paramref name="original"/> and <paramref name="current"/> 
+            strings have the same value using <see cref="F:System.StringComparison.InvariantCulture"/> option.
+            </summary>
+            <param name="original">The original string to compare.</param>
+            <param name="current">The current string to compare.</param>
+            <returns><c>true</c> if <paramref name="original"/> is equal <paramref name="current"/>; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:EntityChange.StringEquality.InvariantCultureIgnoreCase(System.Object,System.Object)">
+            <summary>
+            Determines whether the specified <paramref name="original"/> and <paramref name="current"/> 
+            strings have the same value using <see cref="F:System.StringComparison.InvariantCultureIgnoreCase"/> option.
+            </summary>
+            <param name="original">The original string to compare.</param>
+            <param name="current">The current string to compare.</param>
+            <returns><c>true</c> if <paramref name="original"/> is equal <paramref name="current"/>; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:EntityChange.StringEquality.Ordinal(System.Object,System.Object)">
+            <summary>
+            Determines whether the specified <paramref name="original"/> and <paramref name="current"/> 
+            strings have the same value using <see cref="F:System.StringComparison.Ordinal"/> option.
+            </summary>
+            <param name="original">The original string to compare.</param>
+            <param name="current">The current string to compare.</param>
+            <returns><c>true</c> if <paramref name="original"/> is equal <paramref name="current"/>; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:EntityChange.StringEquality.OrdinalIgnoreCase(System.Object,System.Object)">
+            <summary>
+            Determines whether the specified <paramref name="original"/> and <paramref name="current"/> 
+            strings have the same value using <see cref="F:System.StringComparison.OrdinalIgnoreCase"/> option.
+            </summary>
+            <param name="original">The original string to compare.</param>
+            <param name="current">The current string to compare.</param>
+            <returns><c>true</c> if <paramref name="original"/> is equal <paramref name="current"/>; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="T:EntityChange.StringFormatter">
+            <summary>
+            Standard string format options
+            </summary>
+        </member>
+        <member name="M:EntityChange.StringFormatter.Currency(System.Object)">
+            <summary>
+            Format the specified <paramref name="value"/> as a Currency.
+            </summary>
+            <param name="value">The value to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EntityChange.StringFormatter.Number(System.Object)">
+            <summary>
+            Format the specified <paramref name="value"/> as a Number.
+            </summary>
+            <param name="value">The value to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EntityChange.StringFormatter.ShortDate(System.Object)">
+            <summary>
+            Format the specified <paramref name="value"/> as a Short Date pattern.
+            </summary>
+            <param name="value">The value to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EntityChange.StringFormatter.LongDate(System.Object)">
+            <summary>
+            Format the specified <paramref name="value"/> as a Long Date pattern.
+            </summary>
+            <param name="value">The value to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EntityChange.StringFormatter.FullDateShortTime(System.Object)">
+            <summary>
+            Format the specified <paramref name="value"/> as a Full Date Short Time pattern.
+            </summary>
+            <param name="value">The value to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EntityChange.StringFormatter.FullDateLongTime(System.Object)">
+            <summary>
+            Format the specified <paramref name="value"/> as a Full Date Long Time pattern.
+            </summary>
+            <param name="value">The value to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EntityChange.StringFormatter.GeneralDateShortTime(System.Object)">
+            <summary>
+            Format the specified <paramref name="value"/> as a General Date Short Time pattern.
+            </summary>
+            <param name="value">The value to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EntityChange.StringFormatter.GeneralDateLongTime(System.Object)">
+            <summary>
+            Format the specified <paramref name="value"/> as a General Date Long Time pattern.
+            </summary>
+            <param name="value">The value to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EntityChange.StringFormatter.ShortTime(System.Object)">
+            <summary>
+            Format the specified <paramref name="value"/> as a Short Time pattern.
+            </summary>
+            <param name="value">The value to format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:EntityChange.StringFormatter.LongTime(System.Object)">
+            <summary>
+            Format the specified <paramref name="value"/> as a Long Time pattern.
+            </summary>
+            <param name="value">The value to format.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

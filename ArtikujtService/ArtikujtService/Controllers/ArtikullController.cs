@@ -19,22 +19,44 @@ namespace ArtikujtService.Controllers
     public class ArtikullController : ControllerBase
     {
         private readonly ArtikullService _artikullService;
-        public ArtikullController(ArtikullService artikullService)
+        private readonly Configuration _configuration;
+        public ArtikullController(ArtikullService artikullService, Configuration configuration)
         {
             _artikullService = artikullService;
+            _configuration = configuration;
         }
 
-        
+        [HttpGet("/")]
+        public ActionResult<Configuration> GetConfiguration()
+        {
+
+            return _configuration;
+        }
+
         /// <summary>
-        /// Save Artikull Xml Logs
+        /// Create Artikull Xml Logs
         /// </summary>
         /// <param name="clientArtikujt"></param>
         /// <returns></returns>
-        [HttpPost("logs")]
-        public async Task<ActionResult<ApiResponse>> SaveArtikullXmlLogs(ClientArtikull[] clientArtikujt)
+        [HttpPost("logs/create")]
+        public async Task<ActionResult<ApiResponse>> CreateArtikullXmlLogs(ClientArtikull[] clientArtikujt)
         {
             
-            var result = await _artikullService.SaveArtikullLogs(clientArtikujt);
+            var result = await _artikullService.CreatArtikullLogs(clientArtikujt);
+
+            return new ApiResponse(result);
+        }
+
+        /// <summary>
+        /// Update Artikull Xml Logs
+        /// </summary>
+        /// <param name="clientArtikujt"></param>
+        /// <returns></returns>
+        [HttpPost("logs/update")]
+        public async Task<ActionResult<ApiResponse>> UpdateArtikullXmlLogs(ClientArtikull[] clientArtikujt)
+        {
+
+            var result = await _artikullService.UpdateArtikullLogs(clientArtikujt);
 
             return new ApiResponse(result);
         }
@@ -51,43 +73,5 @@ namespace ArtikujtService.Controllers
             return new ApiResponse(result);
         }
 
-        [HttpGet("logs")]
-        public ActionResult<List<ClientArtikull>>GetArtikullXmlLogs()
-        {
-            var artikullLogs = new List<ClientArtikull>();
-
-            artikullLogs.Add(new ClientArtikull
-            {
-                Id = "Client1_1",
-                Emri = "artikull 1",
-                Njesia = "kg",
-                DataSkadences = "2020-01-01",
-                Cmimi = 54454,
-                Lloj = Lloj.Importuar,
-                KaTvsh = true,
-                Tipi = Tipi.Pije,
-                Barkod = "sfsjflsdfj"
-            });
-            artikullLogs.Add(new ClientArtikull
-            {
-                Id = "Client1_2",
-                Emri = "artikull 2",
-                Njesia = "ml",
-                DataSkadences = "2020-01-02",
-                Cmimi = 54456,
-                Lloj = Lloj.Vendi,
-                KaTvsh = true,
-                Tipi = Tipi.Ushqimore,
-                Barkod = "sfsjflsdfj"
-            });
-
-            return artikullLogs;
-        }
-
-        [HttpGet("str")]
-        public string[] str()
-        {
-            return new string[] { "Client_1", "Clinet_2"};
-        }
     }
 }

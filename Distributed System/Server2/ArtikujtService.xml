@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ArtikujtService</name>
+    </assembly>
+    <members>
+        <member name="P:ArtikujtService.Api.Responses.Errors.ApiError.Code">
+            <summary>
+            Code of the error
+            </summary>
+        </member>
+        <member name="P:ArtikujtService.Api.Responses.Errors.ApiError.Description">
+            <summary>
+            Description of the error
+            </summary>
+        </member>
+        <member name="F:ArtikujtService.Artikujt.Models.Lloj.Importuar">
+            <summary>Importuar</summary>
+        </member>
+        <member name="F:ArtikujtService.Artikujt.Models.Lloj.Vendi">
+            <summary>Vendi</summary>
+        </member>
+        <member name="M:ArtikujtService.Controllers.ArtikullController.CreateArtikullXmlLogs(ArtikujtService.Api.Models.ClientArtikull[])">
+            <summary>
+            Create Artikull Xml Logs
+            </summary>
+            <param name="clientArtikujt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArtikujtService.Controllers.ArtikullController.UpdateArtikullXmlLogs(ArtikujtService.Api.Models.ClientArtikull[])">
+            <summary>
+            Update Artikull Xml Logs
+            </summary>
+            <param name="clientArtikujt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ArtikujtService.Controllers.ArtikullController.DleteArtikullLogs(System.String[])">
+            <summary>
+            Delete Artikull Xml Logs
+            </summary>
+            <param name="artikullIds"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ArtikujtService.Results.ServiceError">
+            <summary>
+            Encapsulates an error from the Services.
+            </summary>
+        </member>
+        <member name="P:ArtikujtService.Results.ServiceError.Code">
+            <summary>
+            Gets or sets the code for this error.
+            </summary>
+            <value>
+            The code for this error.
+            </value>
+        </member>
+        <member name="P:ArtikujtService.Results.ServiceError.Description">
+            <summary>
+            Gets or sets the description for this error.
+            </summary>
+            <value>
+            The description for this error.
+            </value>
+        </member>
+        <member name="P:ArtikujtService.Results.ServiceResult.Succeeded">
+            <summary>
+            Flag indicating whether if the operation succeeded or not.
+            </summary>
+            <value>True if the operation succeeded, otherwise false.</value>
+        </member>
+        <member name="P:ArtikujtService.Results.ServiceResult.Errors">
+            <summary>
+            An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:ArtikujtService.Results.ServiceError"/>s containing an errors
+            that occurred during the service operation.
+            </summary>
+            <value>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of <see cref="T:ArtikujtService.Results.ServiceError"/>s.</value>
+        </member>
+        <member name="P:ArtikujtService.Results.ServiceResult.Success">
+            <summary>
+            Returns an <see cref="T:ArtikujtService.Results.ServiceResult"/> indicating a successful service operation.
+            </summary>
+            <returns>An <see cref="T:ArtikujtService.Results.ServiceResult"/> indicating a successful operation.</returns>
+        </member>
+        <member name="M:ArtikujtService.Results.ServiceResult.Failed(ArtikujtService.Results.ServiceError[])">
+            <summary>
+            Creates an <see cref="T:ArtikujtService.Results.ServiceResult"/> indicating a failed service operation, with a list of <paramref name="errors"/> if applicable.
+            </summary>
+            <param name="errors">An optional array of <see cref="T:ArtikujtService.Results.ServiceError"/>s which caused the operation to fail.</param>
+            <returns>An <see cref="T:ArtikujtService.Results.ServiceResult"/> indicating a failed service operation, with a list of <paramref name="errors"/> if applicable.</returns>
+        </member>
+        <member name="M:ArtikujtService.Results.ServiceResult.ToString">
+            <summary>
+            Converts the value of the current <see cref="T:ArtikujtService.Results.ServiceResult"/> object to its equivalent string representation.
+            </summary>
+            <returns>A string representation of the current <see cref="T:ArtikujtService.Results.ServiceResult"/> object.</returns>
+            <remarks>
+            If the operation was successful the ToString() will return "Succeeded" otherwise it returned 
+            "Failed : " followed by a comma delimited list of error codes from its <see cref="P:ArtikujtService.Results.ServiceResult.Errors"/> collection, if any.
+            </remarks>
+        </member>
+    </members>
+</doc>

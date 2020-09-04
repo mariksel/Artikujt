@@ -16,19 +16,39 @@ namespace ArtikujtService.Artikujt
             _repository = repository;
         }
 
-        public async Task<ServiceResult> SaveArtikullLogs(ClientArtikull[] clientArtikujt)
+        public async Task<ServiceResult> CreatArtikullLogs(ClientArtikull[] clientArtikujt)
         {
             var artikullLogs = new List<ArtikullXmlLog>();
             foreach (var clientArtikull in clientArtikujt)
             {
                 artikullLogs.Add(ArtikullXmlLog.CreateArtikullXmlLog( clientArtikull));
             }
-            return await _repository.SaveArtikullLogs(artikullLogs.ToArray());
+            return await _repository.SaveArtikullLogs(artikullLogs.ToArray(), RecordType.Insert);
+        }
+
+        public async Task<ServiceResult> UpdateArtikullLogs(ClientArtikull[] clientArtikujt)
+        {
+            var artikullLogs = new List<ArtikullXmlLog>();
+            foreach (var clientArtikull in clientArtikujt)
+            {
+                artikullLogs.Add(ArtikullXmlLog.CreateArtikullXmlLog(clientArtikull));
+            }
+            return await _repository.SaveArtikullLogs(artikullLogs.ToArray(), RecordType.Update);
         }
 
         public async Task<ServiceResult> DeleteArtikujtLogs(string[] artikujtIds)
         {
-            return await _repository.DeleteArtikujtLogs(artikujtIds);
+            var artikullLogs = new List<ArtikullXmlLog>();
+            foreach (var id in artikujtIds)
+            {
+                var artikull = new ClientArtikull
+                {
+                    Id = id
+                };
+                artikullLogs.Add(ArtikullXmlLog.CreateArtikullXmlLog(artikull));
+            }
+
+            return await _repository.SaveArtikullLogs(artikullLogs.ToArray(), RecordType.Delete);
         }
     }
 }

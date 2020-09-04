@@ -14,9 +14,37 @@ namespace ServerSync
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ServerSyncForm());
+            if (CheckDatabaseConnection())
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new ServerSyncForm());
+            }
+        }
+
+
+        private static bool CheckDatabaseConnection()
+        {
+            try
+            {
+                using (var repo = new ArtikullRepository())
+                {
+                    repo.CheckConnection();
+                    ServerSyncForm.Configuration = repo.Configurations.First();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+                if (ex.InnerException != null)
+                {
+                    message = ex.InnerException.Message;
+                }
+                MessageBox.Show(message, "Probleme me databazen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
         }
     }
 }

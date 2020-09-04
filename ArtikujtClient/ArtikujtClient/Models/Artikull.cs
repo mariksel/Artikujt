@@ -14,9 +14,11 @@ namespace ArtikutClient.Models
         [NotMapped]
         public bool IsNew { get; set; }
 
-        public int Id { get; set; }
-        [Required(ErrorMessage = nameof(Emri) + " duhet plotesuar")]
+        public string Id { get; set; }
+        
         private string _emri;
+        [StringLength(256)]
+        [Required(ErrorMessage = nameof(Emri) + " duhet plotesuar")]
         public string Emri {
             get => _emri;
             set
@@ -25,12 +27,13 @@ namespace ArtikutClient.Models
                 EmriChanged?.Invoke(value);
             }
         }
+        [StringLength(256)]
         [Required(ErrorMessage = nameof(Njesia) + " duhet plotesuar")]
         public string Njesia { get; set; }
         [Required(ErrorMessage = "Data Skadences duhet plotesuar")]
         public DateTime DataSkadences { get; set; }
-        [Range(0, long.MaxValue, ErrorMessage = "Cmimi nuk mund te jete nje numer negativ ose nje numer shume i madh")]
         private double _cmimi;
+        [Range(0, long.MaxValue, ErrorMessage = "Cmimi nuk mund te jete nje numer negativ ose nje numer shume i madh")]
         public double Cmimi
         {
             get => _cmimi;
@@ -45,6 +48,7 @@ namespace ArtikutClient.Models
         public bool KaTvsh { get; set; }
         [Required(ErrorMessage = nameof(Tipi) + " duhet plotesuar")]
         public string Tipi { get; set; }
+        [StringLength(256)]
         [Required(ErrorMessage = nameof(Barkod) + " duhet plotesuar")]
         public string Barkod { get; set; }
 
@@ -57,14 +61,14 @@ namespace ArtikutClient.Models
                 ProcessStatusChanged?.Invoke(value);
             }
         }
-        private bool _isDeleted = false;
-        public bool IsDeleted
+        private string _recordType = ArtikujtClient.Models.RecordType.Insert;
+        public string RecordType
         {
-            get => _isDeleted;
+            get => _recordType;
             set
             {
-                _isDeleted = value;
-                IsDeletedChanged?.Invoke(value);
+                _recordType = value;
+                IsRecordTypeChanged?.Invoke(value);
             }
         }
 
@@ -81,13 +85,13 @@ namespace ArtikutClient.Models
         public event CmimiEventHandler CmimiChanged;
         public event EmriEventHandler EmriChanged;
         public event ProcessStatusEventHandler ProcessStatusChanged;
-        public event IsDeletedEventHandler IsDeletedChanged;
+        public event IsRecordTypeEventHandler IsRecordTypeChanged;
         public event SaveEventHandler Saving;
     }
 
     public delegate void CmimiEventHandler(double cmimi);
     public delegate void EmriEventHandler(string emri);
     public delegate void ProcessStatusEventHandler(string status);
-    public delegate void IsDeletedEventHandler(bool isDeleted);
+    public delegate void IsRecordTypeEventHandler(string recordType);
     public delegate void SaveEventHandler(bool isSaving);
 }

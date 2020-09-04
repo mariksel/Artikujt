@@ -1,4 +1,4 @@
-﻿using ArtikujtService.Artikujt.Models;
+﻿using ServerSync.Models;
 using System.Data.Entity;
 
 namespace ArtikutClient.Database
@@ -7,6 +7,7 @@ namespace ArtikutClient.Database
     {
         public DbSet<Artikull> Artikujt { get; set; }
         public DbSet<ArtikullXmlLog> ArtikullXmlLogs { get; set; }
+        public DbSet<Configuration> Configurations { get; set; }
 
         public ApplicationDBContext() :
             base("SqlServerConnectionString")

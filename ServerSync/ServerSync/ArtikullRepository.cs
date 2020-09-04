@@ -1,4 +1,4 @@
-﻿using ArtikujtService.Artikujt.Models;
+﻿using ServerSync.Models;
 using ArtikutClient.Database;
 using System;
 using System.Data.Entity;
@@ -7,10 +7,19 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace ArtikujtClient
+namespace ServerSync
 {
     public class ArtikullRepository: ApplicationDBContext
     {
+
+        public void CheckConnection()
+        {
+            if (!Database.Exists())
+                throw new Exception("Database not found");
+            var artikujt = Artikujt.Where(a => a.Id == "1").Count();
+            var config = Configurations.Where(c => c.Id == 1).Count();
+            return;
+        }
 
         public async Task<int> CountunprocessedLogs()
         {
@@ -58,77 +67,110 @@ namespace ArtikujtClient
 
         }
 
-        public async Task ProcessInsertLogs()
+        public async Task ProcessArtikullLogs()
         {
-            var insertLogs = await ArtikullXmlLogs.
-                Where(log => log.RecordType == RecordType.Insert
-                    && log.ProcessStatus == ProcessStatus.UnProcessed)
+            var logs = await ArtikullXmlLogs.
+                Where(log => log.ProcessStatus == ProcessStatus.UnProcessed).
+                OrderBy(log => log.InsertDate)
                 .ToListAsync();
 
-            foreach(var inserLog in insertLogs)
+            foreach (var log in logs)
             {
-                var artikull = inserLog.ToArtikull();
-                Artikujt.Add(artikull);
-                inserLog.ProcessStatus = ProcessStatus.Processed;
-            }
-
-            await SaveChangesAsync();
-
-        }
-
-        public async Task ProcessUpdateLogs()
-        {
-            var updateLogs = await (from log in ArtikullXmlLogs
-                                    where log.RecordType == RecordType.Update
-                                        && log.ProcessStatus == ProcessStatus.UnProcessed
-                                     join artikull in Artikujt on log.ArtikullId equals artikull.Id
-                                     group log by log.ArtikullId into g
-                                     select g.OrderByDescending(log => log.InsertDate).FirstOrDefault())
-                                     .ToListAsync();
-
-            foreach (var updateLog in updateLogs)
-            {
-                var artikull = updateLog.ToArtikull();
-                Artikujt.AddOrUpdate(artikull);
-
-                //mark other update logs as processed
-                var previewsUpdateLogs = ArtikullXmlLogs
-                    .Where(log => log.ArtikullId == updateLog.ArtikullId
-                            && log.InsertDate < updateLog.InsertDate);
-                foreach (var log in previewsUpdateLogs)
+                var artikull = log.ToArtikull();
+                switch (log.RecordType)
                 {
-                    log.ProcessStatus = ProcessStatus.Processed;
+                    case RecordType.Insert:
+                        Artikujt.AddOrUpdate(artikull);
+                        break;
+                    case RecordType.Update:
+                        var currentArtikull = await Artikujt.FindAsync(artikull.Id);
+                        currentArtikull.UpdateFrom(artikull);
+                        break;
+                    case RecordType.Delete:
+                        artikull = await Artikujt.FindAsync(artikull.Id);
+                        if (artikull is null)
+                            break;
+                        Artikujt.Remove(artikull);
+                        break;
                 }
-                updateLog.ProcessStatus = ProcessStatus.Processed;
+                log.ProcessStatus = ProcessStatus.Processed;
             }
 
             await SaveChangesAsync();
 
         }
 
-        public async Task ProcessDeletedLogs()
-        {
-            var deletedLogs = await ArtikullXmlLogs.
-                    Where(log => log.RecordType == RecordType.Delete
-                        && log.ProcessStatus == ProcessStatus.UnProcessed)
-                    .ToListAsync();
+        //public async Task ProcessInsertLogs()
+        //{
+        //    var insertLogs = await ArtikullXmlLogs.
+        //        Where(log => log.RecordType == RecordType.Insert
+        //            && log.ProcessStatus == ProcessStatus.UnProcessed)
+        //        .ToListAsync();
 
-            foreach(var deletedLog in deletedLogs)
-            {
-                // delete the artikull
-                var artikull = await Artikujt.FindAsync(deletedLog.ArtikullId);
-                if(artikull != null)
-                    Artikujt.Remove(artikull);
+        //    foreach(var inserLog in insertLogs)
+        //    {
+        //        var artikull = inserLog.ToArtikull();
+        //        Artikujt.Add(artikull);
+        //        inserLog.ProcessStatus = ProcessStatus.Processed;
+        //    }
 
-                //mark all associated logs as processed
-                var logsOfThisArtikull = ArtikullXmlLogs
-                    .Where(log => log.ArtikullId == deletedLog.ArtikullId);
-                foreach(var log in logsOfThisArtikull)
-                {
-                    log.ProcessStatus = ProcessStatus.Processed;
-                }
-            }
-            await SaveChangesAsync();
-        }
+        //    await SaveChangesAsync();
+
+        //}
+
+        //public async Task ProcessUpdateLogs()
+        //{
+        //    var updateLogs = await (from log in ArtikullXmlLogs
+        //                            where log.RecordType == RecordType.Update
+        //                                && log.ProcessStatus == ProcessStatus.UnProcessed
+        //                             join artikull in Artikujt on log.ArtikullId equals artikull.Id
+        //                             group log by log.ArtikullId into g
+        //                             select g.OrderByDescending(log => log.InsertDate).FirstOrDefault())
+        //                             .ToListAsync();
+
+        //    foreach (var updateLog in updateLogs)
+        //    {
+        //        var artikull = updateLog.ToArtikull();
+        //        Artikujt.AddOrUpdate(artikull);
+
+        //        //mark other update logs as processed
+        //        var previewsUpdateLogs = ArtikullXmlLogs
+        //            .Where(log => log.ArtikullId == updateLog.ArtikullId
+        //                    && log.InsertDate < updateLog.InsertDate);
+        //        foreach (var log in previewsUpdateLogs)
+        //        {
+        //            log.ProcessStatus = ProcessStatus.Processed;
+        //        }
+        //        updateLog.ProcessStatus = ProcessStatus.Processed;
+        //    }
+
+        //    await SaveChangesAsync();
+
+        //}
+
+        //public async Task ProcessDeletedLogs()
+        //{
+        //    var deletedLogs = await ArtikullXmlLogs.
+        //            Where(log => log.RecordType == RecordType.Delete
+        //                && log.ProcessStatus == ProcessStatus.UnProcessed)
+        //            .ToListAsync();
+
+        //    foreach(var deletedLog in deletedLogs)
+        //    {
+        //        // delete the artikull
+        //        var artikull = await Artikujt.FindAsync(deletedLog.ArtikullId);
+        //        if(artikull != null)
+        //            Artikujt.Remove(artikull);
+
+        //        //mark all associated logs as processed
+        //        var logsOfThisArtikull = ArtikullXmlLogs
+        //            .Where(log => log.ArtikullId == deletedLog.ArtikullId);
+        //        foreach(var log in logsOfThisArtikull)
+        //        {
+        //            log.ProcessStatus = ProcessStatus.Processed;
+        //        }
+        //    }
+        //    await SaveChangesAsync();
+        //}
     }
 }

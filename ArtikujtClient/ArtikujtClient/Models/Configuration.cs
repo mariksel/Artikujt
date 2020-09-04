@@ -10,5 +10,7 @@ namespace ArtikujtClient.Models
     {
         public int Id { get; set; }
         public string Prefix { get; set; }
+        public int Sequence { get; set; }
+        public string ServerUrl { get; set; }
     }
 }

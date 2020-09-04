@@ -1,4 +1,5 @@
-﻿using ArtikujtClient;
+﻿using ServerSync;
+using ServerSync.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,12 +15,15 @@ namespace ServerSync
 {
     public partial class ServerSyncForm : Form
     {
+        public static Configuration Configuration { get; set; }
         public ServerSyncForm()
         {
             InitializeComponent();
+
+            prefixLabel.Text = Configuration.Prefix;
         }
 
-        private async void ServerSyncForm_Load(object sender, EventArgs e)
+        private void ServerSyncForm_Load(object sender, EventArgs e)
         {
             UpdateCount();
         }
@@ -28,12 +32,20 @@ namespace ServerSync
         {
             progressBar.Visible = true;
 
-            using (var repo = new ArtikullRepository())
+            try
             {
-                await repo.ProcessDeletedLogs();
-                await repo.ProcessInsertLogs();
-                await repo.ProcessUpdateLogs();
+                using (var repo = new ArtikullRepository())
+                {
+                    await repo.ProcessArtikullLogs();
+                    //await repo.ProcessDeletedLogs();
+                    //await repo.ProcessInsertLogs();
+                    //await repo.ProcessUpdateLogs();
+                }
+            } catch(Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            
 
             UpdateCount();
 

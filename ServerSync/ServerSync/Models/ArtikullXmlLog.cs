@@ -5,7 +5,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace ArtikujtService.Artikujt.Models
+namespace ServerSync.Models
 {
     [Table("xml_log", Schema = "dbo")]
     public class ArtikullXmlLog
@@ -13,7 +13,6 @@ namespace ArtikujtService.Artikujt.Models
         [Column("xml_logId")]
         [Key]
         public long XmlLogId { get; set; }
-        public string ArtikullId { get; set; }
         [Column("xml_data")]
         public string XmlData { get; set; }
         [Column("insert_date")]

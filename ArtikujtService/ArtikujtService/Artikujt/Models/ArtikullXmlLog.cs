@@ -17,7 +17,6 @@ namespace ArtikujtService.Artikujt.Models
     {
         [Column("xml_logId")]
         public long XmlLogId { get; set; }
-        public string ArtikullId { get; set; }
         [Column("xml_data")]
         public string XmlData { get; set; }
         [Column("insert_date")]
@@ -41,7 +40,7 @@ namespace ArtikujtService.Artikujt.Models
             }
             return new ArtikullXmlLog
             {
-                ArtikullId = clientArtikull.Id,
+                //ArtikullId = clientArtikull.Id,
                 XmlData = artikullXml
             };
         }

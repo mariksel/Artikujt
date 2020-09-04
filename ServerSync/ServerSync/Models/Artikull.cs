@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Xml.Serialization;
 
-namespace ArtikujtService.Artikujt.Models
+namespace ServerSync.Models
 {
     [XmlRoot(ElementName = "ClientArtikull")]
     [Table("Artikujt", Schema = "dbo")]
@@ -31,5 +31,17 @@ namespace ArtikujtService.Artikujt.Models
         public string Tipi { get; set; }
         [Required(ErrorMessage = nameof(Barkod) + " duhet plotesuar")]
         public string Barkod { get; set; }
+
+        public void UpdateFrom(Artikull artikull)
+        {
+            Emri = artikull.Emri;
+            Njesia = artikull.Njesia;
+            DataSkadences = artikull.DataSkadences;
+            Cmimi = artikull.Cmimi;
+            Lloj = artikull.Lloj;
+            KaTvsh = artikull.KaTvsh;
+            Tipi = artikull.Tipi;
+            Barkod = artikull.Barkod;
+        }
     }
 }

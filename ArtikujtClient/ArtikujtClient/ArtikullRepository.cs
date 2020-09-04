@@ -3,6 +3,7 @@ using ArtikutClient.Database;
 using ArtikutClient.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
@@ -18,6 +19,24 @@ namespace ArtikujtClient
         {
             return  Configurations.FirstOrDefault();
 
+        }
+
+        public void CheckConnection()
+        {
+            if (!Database.Exists())
+                throw new Exception("Database not found");
+            var artikujt = Artikujt.Where(a => a.Id == "1").Count();
+            var config = Configurations.Where(c => c.Id == 1).Count();
+            return;
+        }
+
+        public async Task<string> GenerateId()
+        {
+            var config = await Configurations.FirstAsync();
+            var id = $"{config.Prefix}_{config.Sequence}";
+            config.Sequence++;
+            await SaveChangesAsync();
+            return id;
         }
 
         public async Task<PaginatedList<Artikull>> GetPageWithArtikuj(int index = 1)
@@ -46,10 +65,24 @@ namespace ArtikujtClient
 
         public async Task RuajArtikullAsync(Artikull artikull)
         {
-            artikull.ProcessStatus = ProcessStatus.UnProcessed;
-            Artikujt.AddOrUpdate(artikull);
+            var currentProcessStatus = artikull.ProcessStatus;
+            try
+            {
+                artikull.ProcessStatus = ProcessStatus.UnProcessed;
+                if (string.IsNullOrWhiteSpace(artikull.Id))
+                    artikull.Id = await GenerateId();
 
-            await SaveChangesAsync();
+
+                Artikujt.AddOrUpdate(artikull);
+
+                await SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                artikull.ProcessStatus = currentProcessStatus;
+                throw ex;
+            }
+            
 
         }
 
@@ -62,7 +95,7 @@ namespace ArtikujtClient
                 throw new ArgumentException($"Artikulli {artikull.Emri} nuk u gjet");
             }
 
-            artikull.IsDeleted = true;
+            artikull.RecordType = RecordType.Delete;
             artikull.ProcessStatus = ProcessStatus.UnProcessed;
             Artikujt.AddOrUpdate(artikull);
 
@@ -70,12 +103,12 @@ namespace ArtikujtClient
 
         }
 
-        public async Task<Artikull[]> GetUnprocessedArtikujtAsync(bool isDeleted)
+        public async Task<Artikull[]> GetUnprocessedArtikujtAsync(string recordType)
         {
 
             var artikujt = await Artikujt
                 .Where(a => a.ProcessStatus == ProcessStatus.UnProcessed
-                && a.IsDeleted == isDeleted)
+                && a.RecordType == recordType)
                 .ToArrayAsync();
             return artikujt;
 
@@ -97,7 +130,7 @@ namespace ArtikujtClient
         public async Task CleanArtikujt()
         {
             var artikujt = await Artikujt
-                .Where(a => a.IsDeleted && a.ProcessStatus == ProcessStatus.Processed)
+                .Where(a => a.RecordType == RecordType.Delete && a.ProcessStatus == ProcessStatus.Processed)
                 .ToArrayAsync();
 
             Artikujt.RemoveRange(artikujt);

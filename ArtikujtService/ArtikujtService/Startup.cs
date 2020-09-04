@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using ArtikujtService.Artikujt;
+using ArtikujtService.Artikujt.Models;
 using ArtikutClient.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -40,11 +41,17 @@ namespace ArtikujtService
                 .AddXmlSerializerFormatters();
 
             services.AddDbContext<ApplicationDBContext>(options => {
-                options.UseSqlServer("Server=localhost;Database=ArtikujtServer;Trusted_Connection=True;");
+                options.UseSqlServer(Configuration.GetConnectionString("ServerDB"));
             });
 
             services.AddScoped<ArtikullRepository>();
             services.AddScoped<ArtikullService>();
+            services.AddScoped<Configuration>( sp =>
+            {
+                var repo = sp.GetRequiredService<ArtikullRepository>();
+                var config = repo.GetConfiguration();
+                return config;
+            });
 
             services.AddSwaggerGen( config =>
             {

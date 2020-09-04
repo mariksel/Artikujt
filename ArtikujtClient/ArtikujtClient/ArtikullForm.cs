@@ -1,18 +1,9 @@
-﻿using ArtikutClient.Database;
+﻿using ArtikujtClient.Models;
 using ArtikutClient.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 
 namespace ArtikujtClient
 {
@@ -38,6 +29,8 @@ namespace ArtikujtClient
 
         public ArtikullForm()
         {
+
+
             InitializeComponent();
 
             ArtikullChanged += OnArtikullChanged;
@@ -50,12 +43,21 @@ namespace ArtikujtClient
             };
             TipiComboBox.SelectedItem = null;
 
+            
+
         }
+
+        
 
         protected override void OnLoad(EventArgs e)
         {
+            
+
             base.OnLoad(e);
             Reset();
+            prefixLabel.Text = ClientSync.Configuration.Prefix;
+
+            
         }
 
         private void OnArtikullChanged(Artikull artikull)
@@ -97,11 +99,7 @@ namespace ArtikujtClient
             Show();
             Reset();
         }
-        private void KerkoButton_Click(object sender, EventArgs e)
-        {
-            Program.KerkoForm.Open();
-            Hide();
-        }
+ 
 
         private async void RuajButton_Click(object sender, EventArgs e)
         {
@@ -133,7 +131,12 @@ namespace ArtikujtClient
                     CreateNewArtikull();
                     Reset();
 
-                    await ClientSync.Instance.SaveArtikujtAsync(currentArtikull);
+                    if(currentArtikull.RecordType == RecordType.Insert)
+                        await ClientSync.Instance.CreateArtikujtAsync(currentArtikull);
+                    else if (currentArtikull.RecordType == RecordType.Update)
+                        await ClientSync.Instance.UpdateArtikujtAsync(currentArtikull);
+                    else 
+                        MessageBox.Show(this, "Invalid Record Type", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 }
                 catch (DbEntityValidationException ex)
@@ -148,8 +151,12 @@ namespace ArtikujtClient
 
                     return;
                 }
+                finally
+                {
+                    currentArtikull.OnSave(false);
 
-                currentArtikull.OnSave(false);
+                }
+
 
             }
         }
@@ -160,18 +167,18 @@ namespace ArtikujtClient
             {
                 try
                 {
-                    await repo.FshiArtikullAsync(Artikull);
-                    await ClientSync.Instance.DeleteArtikujtAsync(Artikull);
+                    var currentArtikull = Artikull;
+                    await repo.FshiArtikullAsync(currentArtikull);
+                    MessageBox.Show(this, $"Artikulli {currentArtikull.Emri} u fshi me sukses", "Suksess", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CreateNewArtikull();
+                    Reset();
+
+                    await ClientSync.Instance.DeleteArtikujtAsync(currentArtikull);
                 } 
                 catch (Exception ex){
                     MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
-                MessageBox.Show(this, $"Artikulli {Artikull.Emri} u fshi me sukses", "Suksess", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                CreateNewArtikull();
-                Reset();
-
 
             }
         }
